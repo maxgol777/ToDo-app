@@ -1,5 +1,5 @@
 import "../../../styles/todo.css";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { TodoItem } from "./TodoItem";
 import type { Todo } from "./types";
 import { TodoInput } from "./TodoInput";
@@ -37,22 +37,26 @@ export const TodoList = () => {
     [setItems],
   );
 
+  // useMemo is not nessessary here, because we dont have any expensive calculations
+  // it was added just to demonstrate the use of useMemo
+  const itemElements = useMemo(
+    () =>
+      items.map((todo) => (
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          onToggleStatus={toggleStatus}
+          onDelete={removeItem}
+        />
+      )),
+    [items, toggleStatus, removeItem],
+  );
+
   return (
     <section className="todo-list">
       <h2 className="todo-list-title">What should you do today?</h2>
       <div className="todo-items">
-        {items.length > 0 ? (
-          items.map((todo) => (
-            <TodoItem
-              key={todo.id}
-              todo={todo}
-              onToggleStatus={toggleStatus}
-              onDelete={removeItem}
-            />
-          ))
-        ) : (
-          <p>No items to show</p>
-        )}
+        {items.length > 0 ? itemElements : <p>No items to show</p>}
       </div>
       <TodoInput onAdd={addItem} />
     </section>

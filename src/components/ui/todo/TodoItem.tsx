@@ -1,13 +1,12 @@
 import { memo } from "react";
 import type { Todo } from "./types";
+import { useContext } from "react";
+import { TodoContext } from "./TodoContext";
 
-type TodoItemProps = {
-  todo: Todo;
-  onToggleStatus: (id: number) => void;
-  onDelete: (id: number) => void;
-};
+type TodoItemProps = { todo: Todo };
 
-export const TodoItem = memo(({ todo, onToggleStatus, onDelete }: TodoItemProps) => {
+export const TodoItem = memo(({ todo }: TodoItemProps) => {
+  const { toggleTodo, removeTodo } = useContext(TodoContext);
   const isDone = todo.status === "Done";
 
   return (
@@ -18,13 +17,13 @@ export const TodoItem = memo(({ todo, onToggleStatus, onDelete }: TodoItemProps)
       </p>
 
       <div className="todo-actions">
-        <button className="todo-button" type="button" onClick={() => onToggleStatus(todo.id)}>
+        <button className="todo-button" type="button" onClick={() => toggleTodo(todo.id)}>
           {isDone ? "Undo" : "Complete"}
         </button>
         <button
           className="todo-button todo-button-danger"
           type="button"
-          onClick={() => onDelete(todo.id)}
+          onClick={() => removeTodo(todo.id)}
         >
           Delete
         </button>

@@ -1,17 +1,15 @@
 import { useState } from "react";
+import { useContext } from "react";
+import { TodoContext } from "./TodoContext";
 
-type TodoInputProps = {
-  onAdd: (title: string) => void;
-};
-
-export const TodoInput = ({ onAdd }: TodoInputProps) => {
+export const TodoInput = () => {
   const [value, setValue] = useState("");
+  const { addTodo } = useContext(TodoContext);
 
   const handleAdd = () => {
     const title = value.trim();
     if (!title) return;
-
-    onAdd(title);
+    addTodo(title);
     setValue("");
   };
 

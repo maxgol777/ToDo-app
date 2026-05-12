@@ -1,7 +1,8 @@
-import { TodoContext } from "./TodoContext";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import type { ReactNode } from "react";
+import { TodoContext } from "./TodoContext";
 import type { Todo } from "./types";
+import type { TodoContextValue } from "./TodoContext";
 
 const INITIAL_TODOS: Todo[] = [
   { id: 1, title: "buy groceries", status: "Pending" },
@@ -16,7 +17,25 @@ type TodoContextProviderProps = {
 };
 
 export const TodoContextProvider = ({ children }: TodoContextProviderProps) => {
-  const [items, setItems] = useState<Todo[]>(INITIAL_TODOS);
+  const [todos, setTodos] = useState<Todo[]>(INITIAL_TODOS);
 
-  return <TodoContext.Provider value={{ items, setItems }}>{children}</TodoContext.Provider>;
+  const addTodo = useCallback((title: string) => {
+    setTodos((current) => [...current, { id: Date.now(), title: title, status: "Pending" }]);
+  }, []);
+
+  const toggleTodo = useCallback((id: number) => {
+    setTodos((current) =>
+      current.map((todo) =>
+        todo.id === id ? { ...todo, status: todo.status === "Done" ? "Pending" : "Done" } : todo,
+      ),
+    );
+  }, []);
+
+  const removeTodo = useCallback((id: number) => {
+    setTodos((current) => current.filter((todo) => todo.id !== id));
+  }, []);
+
+  const value: TodoContextValue = { todos, addTodo, toggleTodo, removeTodo };
+
+  return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 };

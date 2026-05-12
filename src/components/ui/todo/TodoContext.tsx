@@ -1,13 +1,11 @@
 import { createContext } from "react";
-import type { Dispatch, SetStateAction } from "react";
 import type { Todo } from "./types";
 
 export type TodoContextValue = {
-  items: Todo[];
-  setItems: Dispatch<SetStateAction<Todo[]>>;
+  todos: Todo[];
+  addTodo: (title: string) => void;
+  toggleTodo: (id: number) => void;
+  removeTodo: (id: number) => void;
 };
 
-export const TodoContext = createContext<TodoContextValue>({
-  items: [],
-  setItems: () => {},
-});
+export const TodoContext = createContext<TodoContextValue | null>(null);

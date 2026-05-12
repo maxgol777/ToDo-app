@@ -5,14 +5,14 @@ type TodoInputProps = {
 };
 
 export const TodoInput = ({ onAdd }: TodoInputProps) => {
-  const [newValueItem, setNewValueItem] = useState("");
+  const [value, setValue] = useState("");
 
   const handleAdd = () => {
-    const title = newValueItem.trim();
+    const title = value.trim();
     if (!title) return;
 
     onAdd(title);
-    setNewValueItem("");
+    setValue("");
   };
 
   return (
@@ -21,8 +21,8 @@ export const TodoInput = ({ onAdd }: TodoInputProps) => {
         className="todo-input"
         type="text"
         placeholder="Add a new item"
-        value={newValueItem}
-        onChange={(event) => setNewValueItem(event.target.value)}
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
       />
       <button className="todo-button" type="button" onClick={handleAdd}>
         Add

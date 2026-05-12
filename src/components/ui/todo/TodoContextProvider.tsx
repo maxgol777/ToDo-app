@@ -18,9 +18,5 @@ type TodoContextProviderProps = {
 export const TodoContextProvider = ({ children }: TodoContextProviderProps) => {
   const [items, setItems] = useState<Todo[]>(INITIAL_TODOS);
 
-  return (
-    <TodoContext.Provider value={{ items, setItems }}>
-      {children}
-    </TodoContext.Provider>
-  );
+  return <TodoContext.Provider value={{ items, setItems }}>{children}</TodoContext.Provider>;
 };

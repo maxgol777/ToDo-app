@@ -21,9 +21,7 @@ export const TodoList = () => {
     (id: number) => {
       setItems((currentItems) =>
         currentItems.map((item) =>
-          item.id === id
-            ? { ...item, status: item.status === "Done" ? "Pending" : "Done" }
-            : item,
+          item.id === id ? { ...item, status: item.status === "Done" ? "Pending" : "Done" } : item,
         ),
       );
     },
@@ -42,12 +40,7 @@ export const TodoList = () => {
   const itemElements = useMemo(
     () =>
       items.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          onToggleStatus={toggleStatus}
-          onDelete={removeItem}
-        />
+        <TodoItem key={todo.id} todo={todo} onToggleStatus={toggleStatus} onDelete={removeItem} />
       )),
     [items, toggleStatus, removeItem],
   );
@@ -55,9 +48,7 @@ export const TodoList = () => {
   return (
     <section className="todo-list">
       <h2 className="todo-list-title">What should you do today?</h2>
-      <div className="todo-items">
-        {items.length > 0 ? itemElements : <p>No items to show</p>}
-      </div>
+      <div className="todo-items">{items.length > 0 ? itemElements : <p>No items to show</p>}</div>
       <TodoInput onAdd={addItem} />
     </section>
   );

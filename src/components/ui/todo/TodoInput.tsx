@@ -1,5 +1,8 @@
 import { useState } from "react";
-import type { TodoInputProps } from "./types";
+
+type TodoInputProps = {
+  onAdd: (title: string) => void;
+};
 
 export const TodoInput = ({ onAdd }: TodoInputProps) => {
   const [newValueItem, setNewValueItem] = useState("");

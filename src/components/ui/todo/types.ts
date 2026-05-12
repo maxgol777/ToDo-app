@@ -5,13 +5,3 @@ export type Todo = {
   title: string;
   status: TodoStatus;
 };
-
-export type TodoItemProps = {
-  todo: Todo;
-  onToggleStatus: (id: number) => void;
-  onDelete: (id: number) => void;
-};
-
-export type TodoInputProps = {
-  onAdd: (title: string) => void;
-};

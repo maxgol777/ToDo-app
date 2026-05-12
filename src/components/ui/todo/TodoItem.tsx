@@ -1,5 +1,11 @@
 import { memo } from "react";
-import type { TodoItemProps } from "./types";
+import type { Todo } from "./types";
+
+type TodoItemProps = {
+  todo: Todo;
+  onToggleStatus: (id: number) => void;
+  onDelete: (id: number) => void;
+};
 
 export const TodoItem = memo(
   ({ todo, onToggleStatus, onDelete }: TodoItemProps) => {

@@ -1,10 +1,13 @@
 import { TodoList } from "./components/ui/todo/TodoList";
+import { TodoContextProvider } from "./components/ui/todo/TodoContextProvider";
 
 function App() {
   return (
-    <>
-      <TodoList />
-    </>
+    <TodoContextProvider>
+      <>
+        <TodoList />
+      </>
+    </TodoContextProvider>
   );
 }
 

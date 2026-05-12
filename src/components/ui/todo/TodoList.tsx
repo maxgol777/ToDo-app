@@ -38,14 +38,18 @@ export const TodoList = () => {
     <section className="todo-list">
       <h2 className="todo-list-title">What should you do today?</h2>
       <div className="todo-items">
-        {items.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            onToggleStatus={toggleStatus}
-            onDelete={removeItem}
-          />
-        ))}
+        {items.length > 0 ? (
+          items.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              onToggleStatus={toggleStatus}
+              onDelete={removeItem}
+            />
+          ))
+        ) : (
+          <p>No items to show</p>
+        )}
       </div>
       <TodoInput onAdd={addItem} />
     </section>

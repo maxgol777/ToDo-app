@@ -1,11 +1,10 @@
-import { memo } from "react";
 import type { Todo } from "./types";
 import { useContext } from "react";
 import { TodoContext } from "../../../context/todo/TodoContext";
 
 type TodoItemProps = { todo: Todo };
 
-export const TodoItem = memo(({ todo }: TodoItemProps) => {
+export const TodoItem = ({ todo }: TodoItemProps) => {
   const { toggleTodo, removeTodo } = useContext(TodoContext);
   const isDone = todo.status === "Done";
 
@@ -30,4 +29,4 @@ export const TodoItem = memo(({ todo }: TodoItemProps) => {
       </div>
     </div>
   );
-});
+};

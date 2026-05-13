@@ -1,36 +1,32 @@
-import { memo } from "react";
-import type { TodoItemProps } from "./types";
+import type { Todo } from "./types";
+import { useContext } from "react";
+import { TodoContext } from "../../../context/todo/TodoContext";
 
-export const TodoItem = memo(
-  ({ todo, onToggleStatus, onDelete }: TodoItemProps) => {
-    const isDone = todo.status === "Done";
+type TodoItemProps = { todo: Todo };
 
-    return (
-      <div className="todo-item">
-        <h3 className="todo-title">{todo.title}</h3>
-        <p
-          className={`todo-status ${isDone ? "todo-status-done" : "todo-status-pending"}`}
+export const TodoItem = ({ todo }: TodoItemProps) => {
+  const { toggleTodo, removeTodo } = useContext(TodoContext);
+  const isDone = todo.status === "Done";
+
+  return (
+    <div className="todo-item">
+      <h3 className="todo-title">{todo.title}</h3>
+      <p className={`todo-status ${isDone ? "todo-status-done" : "todo-status-pending"}`}>
+        {todo.status}
+      </p>
+
+      <div className="todo-actions">
+        <button className="todo-button" type="button" onClick={() => toggleTodo(todo.id)}>
+          {isDone ? "Undo" : "Complete"}
+        </button>
+        <button
+          className="todo-button todo-button-danger"
+          type="button"
+          onClick={() => removeTodo(todo.id)}
         >
-          {todo.status}
-        </p>
-
-        <div className="todo-actions">
-          <button
-            className="todo-button"
-            type="button"
-            onClick={() => onToggleStatus(todo.id)}
-          >
-            {isDone ? "Undo" : "Complete"}
-          </button>
-          <button
-            className="todo-button todo-button-danger"
-            type="button"
-            onClick={() => onDelete(todo.id)}
-          >
-            Delete
-          </button>
-        </div>
+          Delete
+        </button>
       </div>
-    );
-  },
-);
+    </div>
+  );
+};

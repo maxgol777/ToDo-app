@@ -1,15 +1,16 @@
 import { useState } from "react";
-import type { TodoInputProps } from "./types";
+import { useContext } from "react";
+import { TodoContext } from "../../../context/todo/TodoContext";
 
-export const TodoInput = ({ onAdd }: TodoInputProps) => {
-  const [newValueItem, setNewValueItem] = useState("");
+export const TodoInput = () => {
+  const [value, setValue] = useState("");
+  const { addTodo } = useContext(TodoContext);
 
   const handleAdd = () => {
-    const title = newValueItem.trim();
+    const title = value.trim();
     if (!title) return;
-
-    onAdd(title);
-    setNewValueItem("");
+    addTodo(title);
+    setValue("");
   };
 
   return (
@@ -18,8 +19,8 @@ export const TodoInput = ({ onAdd }: TodoInputProps) => {
         className="todo-input"
         type="text"
         placeholder="Add a new item"
-        value={newValueItem}
-        onChange={(event) => setNewValueItem(event.target.value)}
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
       />
       <button className="todo-button" type="button" onClick={handleAdd}>
         Add

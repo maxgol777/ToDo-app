@@ -1,4 +1,4 @@
-import { useTodoStateHandler } from "../../../context/todo/GlobalState";
+import { useTodoStateHandler } from "../../../state/todo/useTodoStateHandler";
 import type { Todo } from "./types";
 
 type TodoItemProps = { todo: Todo };

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTodoStateHandler } from "../../../context/todo/GlobalState";
+import { useTodoStateHandler } from "../../../state/todo/useTodoStateHandler";
 
 export const TodoInput = () => {
   const [inputValue, setInputValue] = useState("");

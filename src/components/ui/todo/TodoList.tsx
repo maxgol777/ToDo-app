@@ -2,7 +2,7 @@ import "../../../styles/todo.css";
 import { useMemo } from "react";
 import { TodoItem } from "./TodoItem";
 import { TodoInput } from "./TodoInput";
-import { useTodoStateHandler } from "../../../context/todo/GlobalState";
+import { useTodoStateHandler } from "../../../state/todo/useTodoStateHandler";
 
 export const TodoList = () => {
   const { todos } = useTodoStateHandler();

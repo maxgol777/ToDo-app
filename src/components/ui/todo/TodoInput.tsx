@@ -1,10 +1,10 @@
+import { useAtomValue } from "jotai";
+import { globalStateValue } from "../../../context/todo/GlobalState";
 import { useState } from "react";
-import { useContext } from "react";
-import { TodoContext } from "../../../context/todo/TodoContext";
 
 export const TodoInput = () => {
   const [value, setValue] = useState("");
-  const { addTodo } = useContext(TodoContext);
+  const { addTodo } = useAtomValue(globalStateValue);
 
   const handleAdd = () => {
     const title = value.trim();

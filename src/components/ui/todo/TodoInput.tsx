@@ -1,16 +1,15 @@
-import { useAtomValue } from "jotai";
-import { globalStateValue } from "../../../context/todo/GlobalState";
 import { useState } from "react";
+import { useTodoStateHandler } from "../../../context/todo/GlobalState";
 
 export const TodoInput = () => {
-  const [value, setValue] = useState("");
-  const { addTodo } = useAtomValue(globalStateValue);
+  const [inputValue, setInputValue] = useState("");
+  const { addTodo } = useTodoStateHandler();
 
   const handleAdd = () => {
-    const title = value.trim();
+    const title = inputValue.trim();
     if (!title) return;
     addTodo(title);
-    setValue("");
+    setInputValue("");
   };
 
   return (
@@ -19,8 +18,8 @@ export const TodoInput = () => {
         className="todo-input"
         type="text"
         placeholder="Add a new item"
-        value={value}
-        onChange={(event) => setValue(event.target.value)}
+        value={inputValue}
+        onChange={(event) => setInputValue(event.target.value)}
       />
       <button className="todo-button" type="button" onClick={handleAdd}>
         Add

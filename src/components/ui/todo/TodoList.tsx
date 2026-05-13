@@ -2,13 +2,10 @@ import "../../../styles/todo.css";
 import { useMemo } from "react";
 import { TodoItem } from "./TodoItem";
 import { TodoInput } from "./TodoInput";
-
-import { useAtomValue } from "jotai";
-import { globalStateValue } from "../../../context/todo/GlobalState";
+import { useTodoStateHandler } from "../../../context/todo/GlobalState";
 
 export const TodoList = () => {
-  const { todosAtomValue} = useAtomValue(globalStateValue);
-  const todos = todosAtomValue();
+  const { todos } = useTodoStateHandler();
 
   const itemElements = useMemo(
     () => todos.map((todo) => <TodoItem key={todo.id} todo={todo} />),

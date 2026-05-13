@@ -1,11 +1,10 @@
-import { useAtomValue } from "jotai";
-import { globalStateValue } from "../../../context/todo/GlobalState";
+import { useTodoStateHandler } from "../../../context/todo/GlobalState";
 import type { Todo } from "./types";
 
 type TodoItemProps = { todo: Todo };
 
 export const TodoItem = ({ todo }: TodoItemProps) => {
-  const { toggleTodo, removeTodo } = useAtomValue(globalStateValue);
+  const { toggleTodo, removeTodo } = useTodoStateHandler();
   const isDone = todo.status === "Done";
 
   return (
@@ -16,11 +15,7 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
       </p>
 
       <div className="todo-actions">
-        <button
-          className="todo-button"
-          type="button"
-          onClick={() => toggleTodo(todo.id)}
-        >
+        <button className="todo-button" type="button" onClick={() => toggleTodo(todo.id)}>
           {isDone ? "Undo" : "Complete"}
         </button>
         <button

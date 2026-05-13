@@ -1,15 +1,14 @@
-import { atom, getDefaultStore } from "jotai";
+import { atom, useAtomValue, useSetAtom } from "jotai";
 import type { Todo } from "../../components/ui/todo/types";
 
 export type TodoContextValue = {
-    //todos: Todo[];
-    todosAtomValue: () => Todo[];
-    addTodo: (title: string) => void;
-    toggleTodo: (id: number) => void;
-    removeTodo: (id: number) => void;
-  };
+  todos: Todo[];
+  addTodo: (title: string) => void;
+  toggleTodo: (id: number) => void;
+  removeTodo: (id: number) => void;
+};
 
-const INITIAL_TODOS2: Todo[] = [
+const INITIAL_TODOS: Todo[] = [
   { id: 1, title: "buy groceries1", status: "Pending" },
   { id: 2, title: "go to the gym1", status: "Pending" },
   { id: 3, title: "read a book1", status: "Pending" },
@@ -17,35 +16,35 @@ const INITIAL_TODOS2: Todo[] = [
   { id: 5, title: "go for a walk1", status: "Pending" },
 ];
 
-const todosAtom = atom<Todo[]>(INITIAL_TODOS2);
+const todosAtom = atom<Todo[]>(INITIAL_TODOS);
 
-const store = getDefaultStore();
+const addTodoAtom = atom(null, (get, set, title: string) => {
+  const todos = get(todosAtom);
+  set(todosAtom, [...todos, { id: Date.now(), title: title, status: "Pending" }]);
+});
 
-const addTodo = (title: string) => {
-  store.set(todosAtom, (current) => [
-    ...current,
-    { id: Date.now(), title, status: "Pending" },
-  ]);
-};
-
-const toggleTodo = (id: number) => {
-  store.set(todosAtom, (current) =>
-    current.map((todo) =>
+const toggleTodoAtom = atom(null, (get, set, id: number) => {
+  const todos = get(todosAtom);
+  set(
+    todosAtom,
+    todos.map((todo) =>
       todo.id === id ? { ...todo, status: todo.status === "Done" ? "Pending" : "Done" } : todo,
     ),
   );
-};
-
-const removeTodo = (id: number) => {
-  store.set(todosAtom, (current) => current.filter((todo) => todo.id !== id));
-};
-
-export const globalStateValue = atom<TodoContextValue>((get) => {
-  const todos = get(todosAtom);
-  return {
-    todosAtomValue: () => todos,
-    addTodo,
-    toggleTodo,
-    removeTodo,
-  };
 });
+
+const removeTodoAtom = atom(null, (get, set, id: number) => {
+  const todos = get(todosAtom);
+  set(
+    todosAtom,
+    todos.filter((todo) => todo.id !== id),
+  );
+});
+
+export const useTodoStateHandler = (): TodoContextValue => {
+  const todos = useAtomValue(todosAtom);
+  const addTodo = useSetAtom(addTodoAtom);
+  const toggleTodo = useSetAtom(toggleTodoAtom);
+  const removeTodo = useSetAtom(removeTodoAtom);
+  return { todos, addTodo, toggleTodo, removeTodo };
+};

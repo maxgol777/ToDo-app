@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import type { Todo } from "./types";
+import type { Todo } from "../../components/ui/todo/types";
 
 export type TodoContextValue = {
   todos: Todo[];

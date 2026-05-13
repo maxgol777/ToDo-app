@@ -1,7 +1,7 @@
 import { memo } from "react";
 import type { Todo } from "./types";
 import { useContext } from "react";
-import { TodoContext } from "./TodoContext";
+import { TodoContext } from "../../../context/todo/TodoContext";
 
 type TodoItemProps = { todo: Todo };
 

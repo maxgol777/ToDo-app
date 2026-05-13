@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useContext } from "react";
-import { TodoContext } from "./TodoContext";
+import { TodoContext } from "../../../context/todo/TodoContext";
 
 export const TodoInput = () => {
   const [value, setValue] = useState("");

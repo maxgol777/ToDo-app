@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import type { ReactNode } from "react";
 import { TodoContext } from "./TodoContext";
-import type { Todo } from "./types";
+import type { Todo } from "../../components/ui/todo/types";
 import type { TodoContextValue } from "./TodoContext";
 
 const INITIAL_TODOS: Todo[] = [

@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { TodoItem } from "./TodoItem";
 import { TodoInput } from "./TodoInput";
 import { useContext } from "react";
-import { TodoContext } from "./TodoContext";
+import { TodoContext } from "../../../context/todo/TodoContext";
 
 export const TodoList = () => {
   const { todos } = useContext(TodoContext);

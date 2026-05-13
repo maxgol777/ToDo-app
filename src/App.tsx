@@ -1,4 +1,4 @@
-import { TodoContextProvider } from "./components/ui/todo/TodoContextProvider";
+import { TodoContextProvider } from "./context/todo/TodoContextProvider";
 import { TodoList } from "./components/ui/todo/TodoList";
 
 function App() {

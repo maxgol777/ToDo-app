@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useTodoStateHandler } from "../../../state/todo/useTodoStateHandler";
+import "../../../styles/todo/todo-input.css";
+import "../../../styles/todo/todo-button.css";
 
 export const TodoInput = () => {
   const [inputValue, setInputValue] = useState("");

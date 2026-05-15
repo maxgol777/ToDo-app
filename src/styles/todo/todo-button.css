@@ -1,0 +1,14 @@
+.todo-button {
+  border: 1px solid #d1d5db;
+  background-color: #f9fafb;
+  color: #111827;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.todo-button-danger {
+  border-color: #fecaca;
+  background-color: #fef2f2;
+  color: #b91c1c;
+}

@@ -1,8 +1,8 @@
-import "../../../styles/todo.css";
 import { useMemo } from "react";
 import { TodoItem } from "./TodoItem";
 import { TodoInput } from "./TodoInput";
 import { useTodoStateHandler } from "../../../state/todo/useTodoStateHandler";
+import "../../../styles/todo/todo-list.css";
 
 export const TodoList = () => {
   const { todos } = useTodoStateHandler();

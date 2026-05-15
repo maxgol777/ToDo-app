@@ -1,4 +1,4 @@
-import type { Todo } from "../../components/ui/todo/types";
+import type { Todo } from "./types";
 
 export const INITIAL_TODOS: Todo[] = [
   { id: 1, title: "buy groceries1", status: "Pending" },

@@ -1,6 +1,12 @@
-import type { Todo } from "../../components/ui/todo/types";
+export type TodoStatus = "Done" | "Pending";
 
-export type TodoContextValue = {
+export type Todo = {
+  id: number;
+  title: string;
+  status: TodoStatus;
+};
+
+export type TodoStateValue = {
   todos: Todo[];
   addTodo: (title: string) => void;
   toggleTodo: (id: number) => void;

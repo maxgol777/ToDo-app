@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { useTodoStateHandler } from "../../../state/todo/useTodoStateHandler";
-import type { Todo } from "./types";
+import type { Todo } from "../../../state/todo/types";
 import "../../../styles/todo/todo-item.css";
 import "../../../styles/todo/todo-status.css";
 import "../../../styles/todo/todo-button.css";

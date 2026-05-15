@@ -1,9 +1,9 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { addTodoAtom, editTodoAtom, removeTodoAtom, toggleTodoAtom } from "./actions";
 import { todosAtom } from "./atoms";
-import type { TodoContextValue } from "./types";
+import type { TodoStateValue } from "./types";
 
-export const useTodoStateHandler = (): TodoContextValue => {
+export const useTodoStateHandler = (): TodoStateValue => {
   const todos = useAtomValue(todosAtom);
   const addTodo = useSetAtom(addTodoAtom);
   const toggleTodo = useSetAtom(toggleTodoAtom);

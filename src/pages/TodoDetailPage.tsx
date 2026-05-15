@@ -45,7 +45,6 @@ export const TodoDetailPage = () => {
       <p className={`todo-status ${isDone ? "todo-status-done" : "todo-status-pending"}`}>
         Status: {todo.status}
       </p>
-      <p className="page-meta">ID: {todo.id}</p>
 
       <div className="page-actions">
         <button type="button" className="todo-button" onClick={() => toggleTodo(todo.id)}>

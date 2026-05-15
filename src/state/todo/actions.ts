@@ -23,3 +23,11 @@ export const removeTodoAtom = atom(null, (get, set, id: number) => {
     todos.filter((todo) => todo.id !== id),
   );
 });
+
+export const editTodoAtom = atom(null, (get, set, payload: { id: number; title: string }) => {
+  const todos = get(todosAtom);
+  set(
+    todosAtom,
+    todos.map((todo) => (todo.id === payload.id ? { ...todo, title: payload.title } : todo)),
+  );
+});

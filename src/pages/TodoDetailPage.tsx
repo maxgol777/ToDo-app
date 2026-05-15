@@ -15,7 +15,6 @@ export const TodoDetailPage = () => {
   const todo = Number.isFinite(numericId) ? todos.find((item) => item.id === numericId) : undefined;
   const [titleDraft, setTitleDraft] = useState(todo?.title ?? "");
 
-
   if (!todo) {
     return (
       <section className="page-card">

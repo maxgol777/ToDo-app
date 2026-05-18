@@ -6,6 +6,12 @@ export type Todo = {
   status: TodoStatus;
 };
 
+export type TodoActions = {
+  addTodo: (title: string) => void;
+  toggleTodo: (id: number) => void;
+  removeTodo: (id: number) => void;
+};
+
 export type TodoStateValue = {
   todos: Todo[];
   addTodo: (title: string) => void;

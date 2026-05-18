@@ -1,4 +1,4 @@
-import { useTodoStateHandler } from "../../../state/todo/useTodoStateHandler";
+import { useTodoActions } from "../../../state/todo/useTodoActions";
 import { TextInput } from "../common/TextInput";
 import "../../../styles/todo/todo-input.css";
 import "../../../styles/todo/todo-button.css";
@@ -25,7 +25,7 @@ const validateTitle = (title: string) => {
 };
 
 export const TodoInput = () => {
-  const { addTodo } = useTodoStateHandler();
+  const { addTodo } = useTodoActions();
 
   const form = useForm({
     defaultValues: { title: "" },

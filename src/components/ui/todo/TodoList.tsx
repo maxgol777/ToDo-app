@@ -1,11 +1,12 @@
 import { useMemo } from "react";
+import { useAtomValue } from "jotai";
 import { TodoItem } from "./TodoItem";
 import { TodoInput } from "./TodoInput";
-import { useTodoStateHandler } from "../../../state/todo/useTodoStateHandler";
 import "../../../styles/todo/todo-list.css";
+import { todosAtom } from "../../../state/todo/atoms";
 
 export const TodoList = () => {
-  const { todos } = useTodoStateHandler();
+  const todos = useAtomValue(todosAtom);
 
   const itemElements = useMemo(
     () => todos.map((todo) => <TodoItem key={todo.id} todo={todo} />),

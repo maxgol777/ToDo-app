@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { TextInput } from "../components/ui/common/TextInput";
-import { useTodoStateHandler } from "../state/todo/useTodoStateHandler";
+import { useTodoActions } from "../state/todo/useTodoStateHandler";
+import { useAtomValue } from "jotai";
+import { todosAtom } from "../state/todo/atoms";
 import "../styles/page.css";
 import "../styles/todo/todo-status.css";
 import "../styles/todo/todo-button.css";
 
 export const TodoDetailPage = () => {
+  const todos = useAtomValue(todosAtom);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { todos, toggleTodo, removeTodo, editTodo } = useTodoStateHandler();
+  const { toggleTodo, removeTodo, editTodo } = useTodoActions();
 
   const numericId = Number(id);
   const todo = Number.isFinite(numericId) ? todos.find((item) => item.id === numericId) : undefined;

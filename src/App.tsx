@@ -1,7 +1,7 @@
-import { TodoList } from "./components/ui/todo/TodoList";
+import { AppRouter } from "./routes/AppRouter";
 
 function App() {
-  return <TodoList />;
+  return <AppRouter />;
 }
 
 export default App;

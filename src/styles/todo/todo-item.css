@@ -1,0 +1,36 @@
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+.todo-title {
+  margin: 0;
+  min-width: 220px;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+.todo-title-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.todo-title-button:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}

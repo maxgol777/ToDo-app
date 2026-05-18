@@ -1,0 +1,19 @@
+.todo-list {
+  max-width: 820px;
+  margin: 40px auto;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.todo-list-title {
+  margin: 0 0 16px;
+  font-size: 1.5rem;
+}
+
+.todo-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

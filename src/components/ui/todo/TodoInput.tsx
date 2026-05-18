@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useTodoActions } from "../../../state/todo/useTodoActions";
+import { TextInput } from "../common/TextInput";
+import "../../../styles/todo/todo-input.css";
+import "../../../styles/todo/todo-button.css";
 
 export const TodoInput = () => {
   const [inputValue, setInputValue] = useState("");
@@ -14,13 +17,7 @@ export const TodoInput = () => {
 
   return (
     <div className="todo-form">
-      <input
-        className="todo-input"
-        type="text"
-        placeholder="Add a new item"
-        value={inputValue}
-        onChange={(event) => setInputValue(event.target.value)}
-      />
+      <TextInput value={inputValue} onChange={setInputValue} placeholder="Add a new item" />
       <button className="todo-button" type="button" onClick={handleAdd}>
         Add
       </button>

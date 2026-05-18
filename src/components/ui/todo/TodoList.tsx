@@ -1,8 +1,8 @@
-import "../../../styles/todo.css";
 import { useMemo } from "react";
+import { useAtomValue } from "jotai";
 import { TodoItem } from "./TodoItem";
 import { TodoInput } from "./TodoInput";
-import { useAtomValue } from "jotai";
+import "../../../styles/todo/todo-list.css";
 import { todosAtom } from "../../../state/todo/atoms";
 
 export const TodoList = () => {

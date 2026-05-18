@@ -1,0 +1,12 @@
+.todo-status {
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.todo-status-done {
+  color: #15803d;
+}
+
+.todo-status-pending {
+  color: #dc2626;
+}

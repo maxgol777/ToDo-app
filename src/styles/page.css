@@ -1,0 +1,36 @@
+.page-card {
+  max-width: 820px;
+  margin: 24px auto;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background-color: var(--bg);
+  text-align: left;
+}
+
+.page-title {
+  margin: 0 0 12px;
+  font-size: 1.75rem;
+}
+
+.page-meta {
+  color: var(--text);
+  margin-top: 8px;
+}
+
+.page-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.page-back-link {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.page-back-link:hover {
+  text-decoration: underline;
+}

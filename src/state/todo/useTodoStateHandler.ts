@@ -1,14 +1,12 @@
-import { useAtomValue, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { addTodoAtom, editTodoAtom, removeTodoAtom, toggleTodoAtom } from "./actions";
-import { todosAtom } from "./atoms";
-import type { TodoStateValue } from "./types";
+import type { TodoActions } from "./types";
 
-export const useTodoStateHandler = (): TodoStateValue => {
-  const todos = useAtomValue(todosAtom);
+export const useTodoActions = (): TodoActions => {
   const addTodo = useSetAtom(addTodoAtom);
   const toggleTodo = useSetAtom(toggleTodoAtom);
   const removeTodo = useSetAtom(removeTodoAtom);
   const editTodo = useSetAtom(editTodoAtom);
 
-  return { todos, addTodo, toggleTodo, removeTodo, editTodo };
+  return { addTodo, toggleTodo, removeTodo, editTodo };
 };

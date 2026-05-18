@@ -1,26 +1,45 @@
-import { useState } from "react";
 import { useTodoStateHandler } from "../../../state/todo/useTodoStateHandler";
 import { TextInput } from "../common/TextInput";
 import "../../../styles/todo/todo-input.css";
 import "../../../styles/todo/todo-button.css";
+import { useForm } from "@tanstack/react-form";
 
 export const TodoInput = () => {
-  const [inputValue, setInputValue] = useState("");
   const { addTodo } = useTodoStateHandler();
 
-  const handleAdd = () => {
-    const title = inputValue.trim();
-    if (!title) return;
-    addTodo(title);
-    setInputValue("");
-  };
+  const form = useForm({
+    defaultValues: { title: "" },
+    onSubmit: ({ value }) => {
+      const title = value.title.trim();
+      addTodo(title);
+      form.reset();
+    },
+  });
 
   return (
-    <div className="todo-form">
-      <TextInput value={inputValue} onChange={setInputValue} placeholder="Add a new item" />
-      <button className="todo-button" type="button" onClick={handleAdd}>
-        Add
-      </button>
-    </div>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        void form.handleSubmit();
+      }}
+    >
+      <div className="todo-form">
+        <form.Field
+          name="title"
+          children={(field) => (
+            <TextInput
+              value={field.state.value}
+              onChange={(value) => field.handleChange(value)}
+              placeholder="Add a new item"
+            />
+          )}
+        />
+
+        <button className="todo-button" type="submit">
+          Add
+        </button>
+      </div>
+    </form>
   );
 };

@@ -4,6 +4,7 @@ import type { Todo } from "../../../state/todo/types";
 import "../../../styles/todo/todo-item.css";
 import "../../../styles/todo/todo-status.css";
 import "../../../styles/todo/todo-button.css";
+import "../../../styles/todo/error.css";
 
 type TodoItemProps = { todo: Todo };
 

@@ -27,12 +27,25 @@ export const TodoInput = () => {
       <div className="todo-form">
         <form.Field
           name="title"
+          validators={{
+            // If validation is a heavy operation, we use onChangeAsync
+            onChangeAsync: ({ value }) => {
+              if (value.trim().length < 3) {
+                return "Title must be at least 3 characters long";
+              }
+            },
+          }}
           children={(field) => (
-            <TextInput
-              value={field.state.value}
-              onChange={(value) => field.handleChange(value)}
-              placeholder="Add a new item"
-            />
+            <div className="todo-input-wrapper">
+              <TextInput
+                value={field.state.value}
+                onChange={(value) => field.handleChange(value)}
+                placeholder="Add a new item"
+              />
+              {field.state.meta.errors && (
+                <p className="error">{field.state.meta.errors.toString()}</p>
+              )}
+            </div>
           )}
         />
 

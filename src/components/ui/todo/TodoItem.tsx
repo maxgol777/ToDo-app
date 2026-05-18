@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { useTodoStateHandler } from "../../../state/todo/useTodoStateHandler";
+import { useTodoActions } from "../../../state/todo/useTodoActions";
 import type { Todo } from "../../../state/todo/types";
 import "../../../styles/todo/todo-item.css";
 import "../../../styles/todo/todo-status.css";
@@ -9,7 +9,7 @@ type TodoItemProps = { todo: Todo };
 
 export const TodoItem = ({ todo }: TodoItemProps) => {
   const navigate = useNavigate();
-  const { toggleTodo, removeTodo } = useTodoStateHandler();
+  const { toggleTodo, removeTodo } = useTodoActions();
   const isDone = todo.status === "Done";
 
   return (

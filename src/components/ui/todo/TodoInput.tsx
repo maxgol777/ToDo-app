@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useTodoStateHandler } from "../../../state/todo/useTodoStateHandler";
+import { useTodoActions } from "../../../state/todo/useTodoActions";
 import { TextInput } from "../common/TextInput";
 import "../../../styles/todo/todo-input.css";
 import "../../../styles/todo/todo-button.css";
 
 export const TodoInput = () => {
   const [inputValue, setInputValue] = useState("");
-  const { addTodo } = useTodoStateHandler();
+  const { addTodo } = useTodoActions();
 
   const handleAdd = () => {
     const title = inputValue.trim();

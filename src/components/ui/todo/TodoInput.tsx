@@ -2,13 +2,34 @@ import { useTodoStateHandler } from "../../../state/todo/useTodoStateHandler";
 import { TextInput } from "../common/TextInput";
 import "../../../styles/todo/todo-input.css";
 import "../../../styles/todo/todo-button.css";
+import "../../../styles/todo/error.css";
 import { useForm } from "@tanstack/react-form";
+import type { SyntheticEvent } from "react";
+
+const MIN_TITLE_LENGTH = 3;
+const TITLE_REQUIRED_ERROR = "Title is required";
+const TITLE_LENGTH_ERROR = `Title must be at least ${MIN_TITLE_LENGTH} characters long`;
+
+const validateTitle = (title: string) => {
+  const trimmedTitle = title.trim();
+
+  if (!trimmedTitle) {
+    return TITLE_REQUIRED_ERROR;
+  }
+
+  if (trimmedTitle.length < MIN_TITLE_LENGTH) {
+    return TITLE_LENGTH_ERROR;
+  }
+
+  return undefined;
+};
 
 export const TodoInput = () => {
   const { addTodo } = useTodoStateHandler();
 
   const form = useForm({
     defaultValues: { title: "" },
+
     onSubmit: ({ value }) => {
       const title = value.title.trim();
       addTodo(title);
@@ -16,38 +37,35 @@ export const TodoInput = () => {
     },
   });
 
+  const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    void form.handleSubmit();
+  };
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        void form.handleSubmit();
-      }}
-    >
+    <form onSubmit={handleSubmit}>
       <div className="todo-form">
         <form.Field
           name="title"
           validators={{
-            // If validation is a heavy operation, we use onChangeAsync
-            onChangeAsync: ({ value }) => {
-              if (value.trim().length < 3) {
-                return "Title must be at least 3 characters long";
-              }
-            },
+            onChange: ({ value }) => validateTitle(value),
+            onSubmit: ({ value }) => validateTitle(value),
           }}
-          children={(field) => (
+        >
+          {(field) => (
             <div className="todo-input-wrapper">
               <TextInput
                 value={field.state.value}
-                onChange={(value) => field.handleChange(value)}
+                onChange={field.handleChange}
                 placeholder="Add a new item"
               />
-              {field.state.meta.errors && (
-                <p className="error">{field.state.meta.errors.toString()}</p>
-              )}
+              {field.state.meta.errors.length > 0 ? (
+                <p className="error">{field.state.meta.errors.join(", ")}</p>
+              ) : null}
             </div>
           )}
-        />
+        </form.Field>
 
         <button className="todo-button" type="submit">
           Add

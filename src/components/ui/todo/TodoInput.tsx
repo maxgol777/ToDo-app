@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useTodoStateHandler } from "../../../state/todo/useTodoStateHandler";
+import { useTodoActions } from "../../../state/todo/useTodoActions";
 
 export const TodoInput = () => {
   const [inputValue, setInputValue] = useState("");
-  const { addTodo } = useTodoStateHandler();
+  const { addTodo } = useTodoActions();
 
   const handleAdd = () => {
     const title = inputValue.trim();

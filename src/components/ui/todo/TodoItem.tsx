@@ -1,10 +1,10 @@
-import { useTodoStateHandler } from "../../../state/todo/useTodoStateHandler";
+import { useTodoActions } from "../../../state/todo/useTodoActions";
 import type { Todo } from "./types";
 
 type TodoItemProps = { todo: Todo };
 
 export const TodoItem = ({ todo }: TodoItemProps) => {
-  const { toggleTodo, removeTodo } = useTodoStateHandler();
+  const { toggleTodo, removeTodo } = useTodoActions();
   const isDone = todo.status === "Done";
 
   return (

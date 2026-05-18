@@ -2,14 +2,12 @@ import "../../../styles/todo.css";
 import { useMemo } from "react";
 import { TodoItem } from "./TodoItem";
 import { TodoInput } from "./TodoInput";
-import { useContext } from "react";
-import { TodoContext } from "../../../context/todo/TodoContext";
+import { useAtomValue } from "jotai";
+import { todosAtom } from "../../../state/todo/atoms";
 
 export const TodoList = () => {
-  const { todos } = useContext(TodoContext);
+  const todos = useAtomValue(todosAtom);
 
-  // useMemo is not nessessary here, because we dont have any expensive calculations
-  // it was added just to demonstrate the use of useMemo
   const itemElements = useMemo(
     () => todos.map((todo) => <TodoItem key={todo.id} todo={todo} />),
     [todos],

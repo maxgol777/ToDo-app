@@ -1,11 +1,10 @@
+import { useTodoActions } from "../../../state/todo/useTodoActions";
 import type { Todo } from "./types";
-import { useContext } from "react";
-import { TodoContext } from "../../../context/todo/TodoContext";
 
 type TodoItemProps = { todo: Todo };
 
 export const TodoItem = ({ todo }: TodoItemProps) => {
-  const { toggleTodo, removeTodo } = useContext(TodoContext);
+  const { toggleTodo, removeTodo } = useTodoActions();
   const isDone = todo.status === "Done";
 
   return (

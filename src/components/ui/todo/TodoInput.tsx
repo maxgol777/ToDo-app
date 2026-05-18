@@ -50,7 +50,6 @@ export const TodoInput = () => {
           name="title"
           validators={{
             onChange: ({ value }) => validateTitle(value),
-            onSubmit: ({ value }) => validateTitle(value),
           }}
         >
           {(field) => (

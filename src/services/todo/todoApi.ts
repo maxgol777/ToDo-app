@@ -23,9 +23,9 @@ const mapApiTodo = (apiTodo: ApiTodo): Todo => ({
   status: apiTodo.status,
 });
 
-const assertOkResponse = (response: Response): void => {
+const assertOkResponse = (response: Response, message: string): void => {
   if (!response.ok) {
-    throw new Error(`Failed to load todos (status ${response.status})`);
+    throw new Error(message);
   }
 };
 
@@ -38,9 +38,19 @@ const parseTodosPayload = (payload: unknown): ApiTodo[] => {
 
 export const fetchTodos = async (signal?: AbortSignal): Promise<Todo[]> => {
   const response = await fetch(`${API_BASE_URL}/todos`, { signal });
-  assertOkResponse(response);
-  
+  assertOkResponse(response, `Failed to load todos (status ${response.status})`);
+
   const payload: unknown = await response.json();
   const apiTodos = parseTodosPayload(payload);
   return apiTodos.map(mapApiTodo);
+};
+
+export const createTodo = async (title: string, signal?: AbortSignal): Promise<void> => {
+  const response = await fetch(`${API_BASE_URL}/todos`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ title }),
+    signal,
+  });
+  assertOkResponse(response, `Failed to create todo (status ${response.status})`);
 };

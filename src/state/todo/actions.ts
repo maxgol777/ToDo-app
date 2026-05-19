@@ -1,11 +1,6 @@
 import { atom } from "jotai";
 import { todosAtom } from "./atoms";
 
-export const addTodoAtom = atom(null, (get, set, title: string) => {
-  const todos = get(todosAtom);
-  set(todosAtom, [...todos, { id: Date.now(), title, status: "Pending" }]);
-});
-
 export const toggleTodoAtom = atom(null, (get, set, id: number) => {
   const todos = get(todosAtom);
   set(

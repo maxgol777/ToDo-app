@@ -1,4 +1,4 @@
-import { useTodoActions } from "../../../hooks/useTodoActions";
+import { useAddTodo } from "../../../hooks/useAddTodo";
 import { TextInput } from "../common/TextInput";
 import "../../../styles/todo/todo-input.css";
 import "../../../styles/todo/todo-button.css";
@@ -25,14 +25,14 @@ const validateTitle = (title: string) => {
 };
 
 export const TodoInput = () => {
-  const { addTodo } = useTodoActions();
+  const addTodo = useAddTodo();
 
   const form = useForm({
     defaultValues: { title: "" },
 
-    onSubmit: ({ value }) => {
+    onSubmit: async ({ value }) => {
       const title = value.title.trim();
-      addTodo(title);
+      await addTodo(title);
       form.reset();
     },
   });

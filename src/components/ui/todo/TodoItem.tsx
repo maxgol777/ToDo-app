@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useNavigate } from "react-router";
 import { useTodoActions } from "../../../hooks/useTodoActions";
 import type { Todo } from "../../../state/todo/types";
@@ -8,7 +9,7 @@ import "../../../styles/todo/error.css";
 
 type TodoItemProps = { todo: Todo };
 
-export const TodoItem = ({ todo }: TodoItemProps) => {
+export const TodoItem = memo(({ todo }: TodoItemProps) => {
   const navigate = useNavigate();
   const { toggleTodo, removeTodo } = useTodoActions();
   const isDone = todo.status === "Done";
@@ -40,4 +41,4 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
       </div>
     </div>
   );
-};
+});

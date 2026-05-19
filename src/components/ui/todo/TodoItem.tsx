@@ -5,21 +5,14 @@ import "../../../styles/todo/todo-item.css";
 import "../../../styles/todo/todo-status.css";
 import "../../../styles/todo/todo-button.css";
 import "../../../styles/todo/error.css";
-import { useDeleteTodo } from "../../../hooks/useDeleteTodo";
-import { useToggleTodoStatus } from "../../../hooks/useToggleTodoStatus";
+import { useTodoActions } from "../../../hooks/useTodoActions";
 
 type TodoItemProps = { todo: Todo };
 
 export const TodoItem = memo(({ todo }: TodoItemProps) => {
   const navigate = useNavigate();
-  const deleteTodo = useDeleteTodo();
-  const toggleTodoStatus = useToggleTodoStatus();
+  const { deleteTodo, toggleTodoStatus } = useTodoActions();
   const isDone = todo.status === "Done";
-
-  const handleToggle = async () => {
-    await toggleTodoStatus(todo);
-  };
-
   return (
     <div className="todo-item">
       <button
@@ -34,7 +27,7 @@ export const TodoItem = memo(({ todo }: TodoItemProps) => {
       </p>
 
       <div className="todo-actions">
-        <button className="todo-button" type="button" onClick={() => handleToggle()}>
+        <button className="todo-button" type="button" onClick={() => toggleTodoStatus(todo)}>
           {isDone ? "Undo" : "Complete"}
         </button>
         <button

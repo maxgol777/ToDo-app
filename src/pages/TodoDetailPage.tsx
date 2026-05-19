@@ -6,17 +6,13 @@ import { todosAtom } from "../state/todo/atoms";
 import "../styles/page.css";
 import "../styles/todo/todo-status.css";
 import "../styles/todo/todo-button.css";
-import { useDeleteTodo } from "../hooks/useDeleteTodo";
-import { useEditTodo } from "../hooks/useEditTodo";
-import { useToggleTodoStatus } from "../hooks/useToggleTodoStatus";
+import { useTodoActions } from "../hooks/useTodoActions";
 
 export const TodoDetailPage = () => {
   const todos = useAtomValue(todosAtom);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const deleteTodo = useDeleteTodo();
-  const editTodo = useEditTodo();
-  const toggleTodoStatus = useToggleTodoStatus();
+  const { deleteTodo, editTodo, toggleTodoStatus } = useTodoActions();
 
   const numericId = Number(id);
   const todo = Number.isFinite(numericId) ? todos.find((item) => item.id === numericId) : undefined;
@@ -50,10 +46,6 @@ export const TodoDetailPage = () => {
     await navigate("/", { replace: true });
   };
 
-  const handleToggle = async () => {
-    await toggleTodoStatus(todo);
-  };
-
   return (
     <section className="page-card">
       <Link to="/" className="page-back-link">
@@ -67,7 +59,7 @@ export const TodoDetailPage = () => {
         </p>
 
         <div className="page-actions">
-          <button type="button" className="todo-button" onClick={() => handleToggle()}>
+          <button type="button" className="todo-button" onClick={() => toggleTodoStatus(todo)}>
             {isDone ? "Mark as Pending" : "Mark as Done"}
           </button>
           <button type="button" className="todo-button todo-button-danger" onClick={handleDelete}>

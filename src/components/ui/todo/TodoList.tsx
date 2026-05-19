@@ -8,7 +8,7 @@ import { useFetchTodos } from "../../../hooks/useFetchTodos.ts";
 export const TodoList = () => {
   const todos = useAtomValue(todosAtom);
   const { isLoading, error } = useFetchTodos();
-  
+
   const renderBody = () => {
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p className="error">Could not load todos: {error}</p>;

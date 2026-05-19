@@ -1,6 +1,6 @@
 import { useSetAtom } from "jotai";
-import { addTodoAtom, removeTodoAtom, toggleTodoAtom, editTodoAtom } from "./actions";
-import type { TodoActions } from "./types";
+import { addTodoAtom, removeTodoAtom, toggleTodoAtom, editTodoAtom } from "../state/todo/actions";
+import type { TodoActions } from "../state/todo/types";
 
 export const useTodoActions = (): TodoActions => {
   const addTodo = useSetAtom(addTodoAtom);

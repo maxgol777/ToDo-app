@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { useTodoActions } from "../../../state/todo/useTodoActions";
+import { useTodoActions } from "../../../hooks/useTodoActions";
 import type { Todo } from "../../../state/todo/types";
 import "../../../styles/todo/todo-item.css";
 import "../../../styles/todo/todo-status.css";

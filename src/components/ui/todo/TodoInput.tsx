@@ -1,4 +1,4 @@
-import { useTodoActions } from "../../../state/todo/useTodoActions";
+import { useTodoActions } from "../../../hooks/useTodoActions";
 import { TextInput } from "../common/TextInput";
 import "../../../styles/todo/todo-input.css";
 import "../../../styles/todo/todo-button.css";

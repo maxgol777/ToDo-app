@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { TextInput } from "../components/ui/common/TextInput";
-import { useTodoActions } from "../state/todo/useTodoActions";
+import { useTodoActions } from "../hooks/useTodoActions";
 import { useAtomValue } from "jotai";
 import { todosAtom } from "../state/todo/atoms";
 import "../styles/page.css";

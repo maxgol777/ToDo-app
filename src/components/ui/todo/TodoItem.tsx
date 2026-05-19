@@ -1,20 +1,25 @@
 import { memo } from "react";
 import { useNavigate } from "react-router";
-import { useTodoActions } from "../../../hooks/useTodoActions";
 import type { Todo } from "../../../state/todo/types";
 import "../../../styles/todo/todo-item.css";
 import "../../../styles/todo/todo-status.css";
 import "../../../styles/todo/todo-button.css";
 import "../../../styles/todo/error.css";
 import { useDeleteTodo } from "../../../hooks/useDeleteTodo";
+import { useEditTodo } from "../../../hooks/useEditTodo";
 
 type TodoItemProps = { todo: Todo };
 
 export const TodoItem = memo(({ todo }: TodoItemProps) => {
   const navigate = useNavigate();
-  const { toggleTodo } = useTodoActions();
   const deleteTodo = useDeleteTodo();
+  const editTodo = useEditTodo();
   const isDone = todo.status === "Done";
+
+  const handleToggle = async () => {
+    const toggledStatus = isDone ? "Pending" : "Done";
+    await editTodo({ ...todo, status: toggledStatus });
+  };
 
   return (
     <div className="todo-item">
@@ -30,7 +35,7 @@ export const TodoItem = memo(({ todo }: TodoItemProps) => {
       </p>
 
       <div className="todo-actions">
-        <button className="todo-button" type="button" onClick={() => toggleTodo(todo.id)}>
+        <button className="todo-button" type="button" onClick={() => handleToggle()}>
           {isDone ? "Undo" : "Complete"}
         </button>
         <button

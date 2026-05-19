@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { TextInput } from "../components/ui/common/TextInput";
-import { useTodoActions } from "../hooks/useTodoActions";
 import { useAtomValue } from "jotai";
 import { todosAtom } from "../state/todo/atoms";
 import "../styles/page.css";
@@ -14,7 +13,6 @@ export const TodoDetailPage = () => {
   const todos = useAtomValue(todosAtom);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { toggleTodo } = useTodoActions();
   const deleteTodo = useDeleteTodo();
   const editTodo = useEditTodo();
 
@@ -50,6 +48,11 @@ export const TodoDetailPage = () => {
     await navigate("/", { replace: true });
   };
 
+  const handleToggle = async () => {
+    const status = isDone ? "Pending" : "Done";
+    await editTodo({ ...todo, status }); 
+  };
+
   return (
     <section className="page-card">
       <Link to="/" className="page-back-link">
@@ -63,7 +66,7 @@ export const TodoDetailPage = () => {
         </p>
 
         <div className="page-actions">
-          <button type="button" className="todo-button" onClick={() => toggleTodo(todo.id)}>
+          <button type="button" className="todo-button" onClick={() => handleToggle()}>
             {isDone ? "Mark as Pending" : "Mark as Done"}
           </button>
           <button type="button" className="todo-button todo-button-danger" onClick={handleDelete}>

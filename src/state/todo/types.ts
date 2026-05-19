@@ -7,6 +7,6 @@ export type Todo = {
 };
 
 export type TodoActions = {
-  toggleTodo: (id: number) => void;
-  editTodo: (payload: { id: number; title: string }) => void;
+  // toggleTodo: (id: number) => void;
+  // editTodo: (payload: { id: number; title: string }) => void;
 };

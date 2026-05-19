@@ -8,6 +8,7 @@ import "../styles/todo/todo-status.css";
 import "../styles/todo/todo-button.css";
 import { useDeleteTodo } from "../hooks/useDeleteTodo";
 import { useEditTodo } from "../hooks/useEditTodo";
+import { useToggleTodoStatus } from "../hooks/useToggleTodoStatus";
 
 export const TodoDetailPage = () => {
   const todos = useAtomValue(todosAtom);
@@ -15,6 +16,7 @@ export const TodoDetailPage = () => {
   const navigate = useNavigate();
   const deleteTodo = useDeleteTodo();
   const editTodo = useEditTodo();
+  const toggleTodoStatus = useToggleTodoStatus();
 
   const numericId = Number(id);
   const todo = Number.isFinite(numericId) ? todos.find((item) => item.id === numericId) : undefined;
@@ -49,8 +51,7 @@ export const TodoDetailPage = () => {
   };
 
   const handleToggle = async () => {
-    const status = isDone ? "Pending" : "Done";
-    await editTodo({ ...todo, status }); 
+    await toggleTodoStatus(todo);
   };
 
   return (

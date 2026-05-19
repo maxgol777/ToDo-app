@@ -6,19 +6,18 @@ import "../../../styles/todo/todo-status.css";
 import "../../../styles/todo/todo-button.css";
 import "../../../styles/todo/error.css";
 import { useDeleteTodo } from "../../../hooks/useDeleteTodo";
-import { useEditTodo } from "../../../hooks/useEditTodo";
+import { useToggleTodoStatus } from "../../../hooks/useToggleTodoStatus";
 
 type TodoItemProps = { todo: Todo };
 
 export const TodoItem = memo(({ todo }: TodoItemProps) => {
   const navigate = useNavigate();
   const deleteTodo = useDeleteTodo();
-  const editTodo = useEditTodo();
+  const toggleTodoStatus = useToggleTodoStatus();
   const isDone = todo.status === "Done";
 
   const handleToggle = async () => {
-    const toggledStatus = isDone ? "Pending" : "Done";
-    await editTodo({ ...todo, status: toggledStatus });
+    await toggleTodoStatus(todo);
   };
 
   return (

@@ -62,3 +62,13 @@ export const deleteTodo = async (id: number, signal?: AbortSignal): Promise<void
   });
   assertOkResponse(response, `Failed to delete todo (status ${response.status})`);
 };
+
+export const updateTodo = async (todo: Todo, signal?: AbortSignal): Promise<void> => {
+  const response = await fetch(`${API_BASE_URL}/todos/${todo.id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ title: todo.title, status: todo.status }),
+    signal,
+  });
+  assertOkResponse(response, `Failed to update todo (status ${response.status})`);
+};

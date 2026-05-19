@@ -7,12 +7,16 @@ import { todosAtom } from "../state/todo/atoms";
 import "../styles/page.css";
 import "../styles/todo/todo-status.css";
 import "../styles/todo/todo-button.css";
+import { useDeleteTodo } from "../hooks/useDeleteTodo";
+import { useEditTodo } from "../hooks/useEditTodo";
 
 export const TodoDetailPage = () => {
   const todos = useAtomValue(todosAtom);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { toggleTodo, removeTodo, editTodo } = useTodoActions();
+  const { toggleTodo } = useTodoActions();
+  const deleteTodo = useDeleteTodo();
+  const editTodo = useEditTodo();
 
   const numericId = Number(id);
   const todo = Number.isFinite(numericId) ? todos.find((item) => item.id === numericId) : undefined;
@@ -35,14 +39,14 @@ export const TodoDetailPage = () => {
   const isDone = todo.status === "Done";
 
   const handleDelete = async () => {
-    removeTodo(todo.id);
+    await deleteTodo(todo.id);
     await navigate("/", { replace: true });
   };
 
   const handleSave = async () => {
     const title = titleDraft.trim();
     if (!title) return;
-    editTodo({ id: todo.id, title });
+    await editTodo({ ...todo, title });
     await navigate("/", { replace: true });
   };
 

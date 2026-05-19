@@ -5,10 +5,11 @@ import { fetchTodos } from "../services/todo/todoApi.ts";
 
 export const useDeleteTodo = () => {
   const setTodos = useSetAtom(todosAtom);
+  const controller = new AbortController();
 
   return async (id: number): Promise<void> => {
-    await deleteTodo(id);
-    const todos = await fetchTodos();
+    await deleteTodo(id, controller.signal);
+    const todos = await fetchTodos(controller.signal);
     setTodos(todos);
   };
 };

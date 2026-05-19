@@ -6,12 +6,14 @@ import "../../../styles/todo/todo-item.css";
 import "../../../styles/todo/todo-status.css";
 import "../../../styles/todo/todo-button.css";
 import "../../../styles/todo/error.css";
+import { useDeleteTodo } from "../../../hooks/useDeleteTodo";
 
 type TodoItemProps = { todo: Todo };
 
 export const TodoItem = memo(({ todo }: TodoItemProps) => {
   const navigate = useNavigate();
-  const { toggleTodo, removeTodo } = useTodoActions();
+  const { toggleTodo } = useTodoActions();
+  const deleteTodo = useDeleteTodo();
   const isDone = todo.status === "Done";
 
   return (
@@ -34,7 +36,7 @@ export const TodoItem = memo(({ todo }: TodoItemProps) => {
         <button
           className="todo-button todo-button-danger"
           type="button"
-          onClick={() => removeTodo(todo.id)}
+          onClick={() => deleteTodo(todo.id)}
         >
           Delete
         </button>

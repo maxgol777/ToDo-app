@@ -8,6 +8,5 @@ export type Todo = {
 
 export type TodoActions = {
   toggleTodo: (id: number) => void;
-  removeTodo: (id: number) => void;
   editTodo: (payload: { id: number; title: string }) => void;
 };

@@ -4,9 +4,10 @@ import { todoQueryKeys } from "../services/todo/queryKeys.ts";
 
 export const useDeleteTodo = () => {
   const queryClient = useQueryClient();
+  const controller = new AbortController();
 
   const { mutateAsync } = useMutation({
-    mutationFn: (id: number) => deleteTodo(id),
+    mutationFn: (id: number) => deleteTodo(id, controller.signal),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: todoQueryKeys });
     },

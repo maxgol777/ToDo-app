@@ -10,9 +10,10 @@ type UseFetchTodosResult = {
 };
 
 export const useFetchTodos = (): UseFetchTodosResult => {
+  const controller = new AbortController();
   const { data, isPending, error } = useQuery({
     queryKey: todoQueryKeys,
-    queryFn: ({ signal }) => fetchTodos(signal),
+    queryFn: () => fetchTodos(controller.signal),
   });
 
   return {

@@ -34,14 +34,14 @@ export const TodoDetailPage = () => {
   const isDone = todo.status === "Done";
 
   const handleDelete = async () => {
-    await deleteTodo(todo.id);
+    deleteTodo(todo.id);
     await navigate("/", { replace: true });
   };
 
   const handleSave = async () => {
     const title = titleDraft.trim();
     if (!title) return;
-    await editTodo({ ...todo, title });
+    editTodo({ ...todo, title });
     await navigate("/", { replace: true });
   };
 

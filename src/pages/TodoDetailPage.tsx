@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { TextInput } from "../components/ui/common/TextInput";
-import { useAtomValue } from "jotai";
-import { todosAtom } from "../state/todo/atoms";
 import "../styles/page.css";
 import "../styles/todo/todo-status.css";
 import "../styles/todo/todo-button.css";
 import { useTodoActions } from "../hooks/useTodoActions";
+import { useFetchTodos } from "../hooks/useFetchTodos";
 
 export const TodoDetailPage = () => {
-  const todos = useAtomValue(todosAtom);
+  const { todos } = useFetchTodos();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { deleteTodo, editTodo, toggleTodoStatus } = useTodoActions();

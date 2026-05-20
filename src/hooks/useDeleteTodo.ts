@@ -1,14 +1,16 @@
-import { useSetAtom } from "jotai";
-import { todosAtom } from "../state/todo/atoms";
-import { deleteTodo, fetchTodos } from "../services/todo/todoApi.ts";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteTodo } from "../services/todo/todoApi.ts";
+import { todoQueryKeys } from "../services/todo/queryKeys.ts";
 
 export const useDeleteTodo = () => {
-  const setTodos = useSetAtom(todosAtom);
- 
-  return async (id: number) => {
-    const controller = new AbortController();
-    await deleteTodo(id, controller.signal);
-    const todos = await fetchTodos(controller.signal);
-    setTodos(todos);
-  };
+  const queryClient = useQueryClient();
+
+  const { mutateAsync } = useMutation({
+    mutationFn: (id: number) => deleteTodo(id),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: todoQueryKeys });
+    },
+  });
+
+  return (id: number) => mutateAsync(id);
 };

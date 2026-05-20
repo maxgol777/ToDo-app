@@ -1,13 +1,10 @@
-import { useAtomValue } from "jotai";
 import { TodoItem } from "./TodoItem";
 import { TodoInput } from "./TodoInput";
 import "../../../styles/todo/todo-list.css";
-import { todosAtom } from "../../../state/todo/atoms";
 import { useFetchTodos } from "../../../hooks/useFetchTodos.ts";
 
 export const TodoList = () => {
-  const todos = useAtomValue(todosAtom);
-  const { isLoading, error } = useFetchTodos();
+  const { todos, isLoading, error } = useFetchTodos();
 
   const renderBody = () => {
     if (isLoading) return <p>Loading...</p>;

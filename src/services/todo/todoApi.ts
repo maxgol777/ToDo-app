@@ -1,5 +1,6 @@
 import { API_BASE_URL } from "../../config/api.ts";
 import type { Todo } from "../../state/todo/types";
+import { array, number, object, parse, picklist, string } from "valibot";
 
 type ApiTodo = {
   id: number;
@@ -7,15 +8,13 @@ type ApiTodo = {
   status: Todo["status"];
 };
 
-const isApiTodo = (value: unknown): value is ApiTodo => {
-  if (typeof value !== "object" || value === null) return false;
-  const candidate = value as Record<string, unknown>;
-  return (
-    typeof candidate.id === "number" &&
-    typeof candidate.title === "string" &&
-    (candidate.status === "Done" || candidate.status === "Pending")
-  );
-};
+const apiTodoSchema = object({
+  id: number(),
+  title: string(),
+  status: picklist(["Done", "Pending"]),
+});
+
+const apiTodosSchema = array(apiTodoSchema);
 
 const mapApiTodo = (apiTodo: ApiTodo): Todo => ({
   id: apiTodo.id,
@@ -30,10 +29,11 @@ const assertOkResponse = (response: Response, message: string): void => {
 };
 
 const parseTodosPayload = (payload: unknown): ApiTodo[] => {
-  if (!Array.isArray(payload) || !payload.every(isApiTodo)) {
+  try {
+    return parse(apiTodosSchema, payload);
+  } catch {
     throw new Error("Received malformed todos payload from the server");
   }
-  return payload;
 };
 
 export const fetchTodos = async (signal?: AbortSignal): Promise<Todo[]> => {

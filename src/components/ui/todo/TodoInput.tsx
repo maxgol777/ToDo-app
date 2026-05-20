@@ -1,4 +1,4 @@
-import { useTodoActions } from "../../../state/todo/useTodoActions";
+import { useTodoActions } from "../../../hooks/useTodoActions";
 import { TextInput } from "../common/TextInput";
 import "../../../styles/todo/todo-input.css";
 import "../../../styles/todo/todo-button.css";
@@ -30,9 +30,9 @@ export const TodoInput = () => {
   const form = useForm({
     defaultValues: { title: "" },
 
-    onSubmit: ({ value }) => {
+    onSubmit: async ({ value }) => {
       const title = value.title.trim();
-      addTodo(title);
+      await addTodo(title);
       form.reset();
     },
   });

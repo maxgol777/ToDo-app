@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { TextInput } from "../components/ui/common/TextInput";
-import { useTodoActions } from "../state/todo/useTodoStateHandler";
 import { useAtomValue } from "jotai";
 import { todosAtom } from "../state/todo/atoms";
 import "../styles/page.css";
 import "../styles/todo/todo-status.css";
 import "../styles/todo/todo-button.css";
+import { useTodoActions } from "../hooks/useTodoActions";
 
 export const TodoDetailPage = () => {
   const todos = useAtomValue(todosAtom);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { toggleTodo, removeTodo, editTodo } = useTodoActions();
+  const { deleteTodo, editTodo, toggleTodoStatus } = useTodoActions();
 
   const numericId = Number(id);
   const todo = Number.isFinite(numericId) ? todos.find((item) => item.id === numericId) : undefined;
@@ -35,14 +35,14 @@ export const TodoDetailPage = () => {
   const isDone = todo.status === "Done";
 
   const handleDelete = async () => {
-    removeTodo(todo.id);
+    await deleteTodo(todo.id);
     await navigate("/", { replace: true });
   };
 
   const handleSave = async () => {
     const title = titleDraft.trim();
     if (!title) return;
-    editTodo({ id: todo.id, title });
+    await editTodo({ ...todo, title });
     await navigate("/", { replace: true });
   };
 
@@ -59,7 +59,7 @@ export const TodoDetailPage = () => {
         </p>
 
         <div className="page-actions">
-          <button type="button" className="todo-button" onClick={() => toggleTodo(todo.id)}>
+          <button type="button" className="todo-button" onClick={() => toggleTodoStatus(todo)}>
             {isDone ? "Mark as Pending" : "Mark as Done"}
           </button>
           <button type="button" className="todo-button todo-button-danger" onClick={handleDelete}>

@@ -7,8 +7,8 @@ export type Todo = {
 };
 
 export type TodoActions = {
-  addTodo: (title: string) => void;
-  toggleTodo: (id: number) => void;
-  removeTodo: (id: number) => void;
-  editTodo: (payload: { id: number; title: string }) => void;
+  addTodo: (title: string) => Promise<void>;
+  deleteTodo: (id: number) => Promise<void>;
+  editTodo: (todo: Todo) => Promise<void>;
+  toggleTodoStatus: (todo: Todo) => Promise<void>;
 };

@@ -6,7 +6,7 @@ export const useAddTodo = () => {
   const setTodos = useSetAtom(todosAtom);
   const controller = new AbortController();
 
-  return async (title: string): Promise<void> => {
+  return async (title: string) => {
     await addTodo(title, controller.signal);
     const todos = await fetchTodos(controller.signal);
     setTodos(todos);

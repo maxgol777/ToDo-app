@@ -6,7 +6,7 @@ export const useDeleteTodo = () => {
   const setTodos = useSetAtom(todosAtom);
   const controller = new AbortController();
 
-  return async (id: number): Promise<void> => {
+  return async (id: number) => {
     await deleteTodo(id, controller.signal);
     const todos = await fetchTodos(controller.signal);
     setTodos(todos);

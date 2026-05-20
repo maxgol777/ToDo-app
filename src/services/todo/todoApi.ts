@@ -45,7 +45,7 @@ export const fetchTodos = async (signal?: AbortSignal): Promise<Todo[]> => {
   return apiTodos.map(mapApiTodo);
 };
 
-export const addTodo = async (title: string, signal?: AbortSignal): Promise<void> => {
+export const addTodo = async (title: string, signal?: AbortSignal) => {
   const response = await fetch(`${API_BASE_URL}/todos`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -55,7 +55,7 @@ export const addTodo = async (title: string, signal?: AbortSignal): Promise<void
   assertOkResponse(response, `Failed to create todo (status ${response.status})`);
 };
 
-export const deleteTodo = async (id: number, signal?: AbortSignal): Promise<void> => {
+export const deleteTodo = async (id: number, signal?: AbortSignal) => {
   const response = await fetch(`${API_BASE_URL}/todos/${id}`, {
     method: "DELETE",
     signal,
@@ -63,7 +63,7 @@ export const deleteTodo = async (id: number, signal?: AbortSignal): Promise<void
   assertOkResponse(response, `Failed to delete todo (status ${response.status})`);
 };
 
-export const updateTodo = async (todo: Todo, signal?: AbortSignal): Promise<void> => {
+export const updateTodo = async (todo: Todo, signal?: AbortSignal) => {
   const response = await fetch(`${API_BASE_URL}/todos/${todo.id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },

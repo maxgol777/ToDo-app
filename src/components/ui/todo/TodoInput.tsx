@@ -30,9 +30,9 @@ export const TodoInput = () => {
   const form = useForm({
     defaultValues: { title: "" },
 
-    onSubmit: async ({ value }) => {
+    onSubmit: ({ value }) => {
       const title = value.title.trim();
-      await addTodo(title);
+      addTodo(title);
       form.reset();
     },
   });

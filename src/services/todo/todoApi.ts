@@ -45,12 +45,11 @@ export const fetchTodos = async (signal?: AbortSignal): Promise<Todo[]> => {
   return apiTodos.map(mapApiTodo);
 };
 
-export const addTodo = async (title: string, signal?: AbortSignal) => {
+export const addTodo = async (title: string) => {
   const response = await fetch(`${API_BASE_URL}/todos`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ title }),
-    signal,
   });
   assertOkResponse(response, `Failed to create todo (status ${response.status})`);
 };

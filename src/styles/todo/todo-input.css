@@ -1,5 +1,5 @@
 @layer components {
-  .todo-input-form {
+  .todo-form {
     @apply mt-5;
   }
 
@@ -7,7 +7,7 @@
     @apply flex flex-col gap-3 sm:flex-row sm:items-start;
   }
 
-  .todo-input-field-wrap {
+  .todo-input-wrapper {
     @apply flex-1;
   }
 

@@ -41,7 +41,7 @@ export const TodoInput = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="todo-input-form">
+    <form onSubmit={handleSubmit} className="todo-form">
       <div className="todo-input-row">
         <form.Field
           name="title"
@@ -50,7 +50,7 @@ export const TodoInput = () => {
           }}
         >
           {(field) => (
-            <div className="todo-input-field-wrap">
+            <div className="todo-input-wrapper">
               <TextInput
                 value={field.state.value}
                 onChange={field.handleChange}
@@ -63,7 +63,12 @@ export const TodoInput = () => {
           )}
         </form.Field>
 
-        <button className="todo-submit-button" type="submit" disabled={isPending} aria-busy={isPending}>
+        <button
+          className="todo-submit-button"
+          type="submit"
+          disabled={isPending}
+          aria-busy={isPending}
+        >
           {isPending ? (
             <span className="todo-submit-content">
               <span className="todo-submit-spinner" aria-hidden="true" />

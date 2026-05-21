@@ -17,9 +17,9 @@ export const TodoList = () => {
   };
 
   return (
-    <section className="todo-list-shell">
+    <section className="todo-list">
       <h2 className="todo-list-title">What should you do today?</h2>
-      <div className="todo-list-items">{renderBody()}</div>
+      <div className="todo-items">{renderBody()}</div>
       <TodoInput />
     </section>
   );

@@ -1,4 +1,8 @@
 @import "tailwindcss";
+@import "./styles/todo/todo-list.css";
+@import "./styles/todo/todo-item.css";
+@import "./styles/todo/todo-input.css";
+@import "./styles/todo/todo-error.css";
 
 :root {
   --text: #6b6375;

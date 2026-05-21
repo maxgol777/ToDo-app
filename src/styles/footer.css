@@ -1,12 +1,11 @@
-.app-footer {
-  border-top: 1px solid var(--border);
-  background-color: var(--bg);
-}
+@reference "../index.css";
 
-.app-footer-inner {
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 16px 24px;
-  text-align: center;
-  color: var(--text);
+@layer components {
+  .app-footer {
+    @apply border-t border-(--border) bg-(--bg);
+  }
+
+  .app-footer-inner {
+    @apply mx-auto max-w-5xl px-6 py-4 text-center text-(--text);
+  }
 }

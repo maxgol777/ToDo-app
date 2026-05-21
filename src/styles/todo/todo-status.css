@@ -1,12 +1,15 @@
-.todo-status {
-  margin: 0;
-  text-transform: capitalize;
-}
+@reference "../../index.css";
 
-.todo-status-done {
-  color: #15803d;
-}
+@layer components {
+  .todo-status {
+    @apply m-0 capitalize;
+  }
 
-.todo-status-pending {
-  color: #dc2626;
+  .todo-status-done {
+    @apply text-green-700;
+  }
+
+  .todo-status-pending {
+    @apply text-red-600;
+  }
 }

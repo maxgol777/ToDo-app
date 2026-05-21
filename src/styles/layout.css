@@ -1,15 +1,11 @@
-.app-shell {
-  display: flex;
-  flex-direction: column;
-  min-height: 100svh;
-  width: 100%;
-}
+@reference "../index.css";
 
-.app-main {
-  flex: 1;
-  width: 100%;
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 24px;
-  box-sizing: border-box;
+@layer components {
+  .app-shell {
+    @apply flex min-h-svh w-full flex-col;
+  }
+
+  .app-main {
+    @apply mx-auto box-border w-full max-w-5xl flex-1 p-6;
+  }
 }

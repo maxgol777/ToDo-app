@@ -14,7 +14,7 @@ export const useAddTodo = () => {
       return addTodo(title);
     },
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: todoQueryKeys });
+      void queryClient.invalidateQueries({ queryKey: todoQueryKeys.todos });
     },
   });
 

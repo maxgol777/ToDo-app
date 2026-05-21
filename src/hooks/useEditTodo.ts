@@ -9,8 +9,9 @@ export const useEditTodo = () => {
 
   const { mutateAsync } = useMutation({
     mutationFn: (todo: Todo) => updateTodo(todo, controller.signal),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: todoQueryKeys });
+    onSuccess: (_data, todo) => {
+      void queryClient.invalidateQueries({ queryKey: todoQueryKeys.todos });
+      void queryClient.invalidateQueries({ queryKey: todoQueryKeys.detail(todo.id) });
     },
   });
 

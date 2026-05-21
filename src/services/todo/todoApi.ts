@@ -36,6 +36,14 @@ const parseTodosPayload = (payload: unknown): ApiTodo[] => {
   }
 };
 
+const parseSingleTodoPayload = (payload: unknown): ApiTodo => {
+  try {
+    return parse(apiTodoSchema, payload);
+  } catch {
+    throw new Error("Received malformed todo payload from the server");
+  }
+};
+
 export const fetchTodos = async (signal?: AbortSignal): Promise<Todo[]> => {
   const response = await fetch(`${API_BASE_URL}/todos`, { signal });
   assertOkResponse(response, `Failed to load todos (status ${response.status})`);
@@ -43,6 +51,15 @@ export const fetchTodos = async (signal?: AbortSignal): Promise<Todo[]> => {
   const payload: unknown = await response.json();
   const apiTodos = parseTodosPayload(payload);
   return apiTodos.map(mapApiTodo);
+};
+
+export const fetchSingleTodo = async (id: number, signal?: AbortSignal): Promise<Todo> => {
+  const response = await fetch(`${API_BASE_URL}/todos/${id}`, { signal });
+  assertOkResponse(response, `Failed to load todo (status ${response.status})`);
+
+  const payload: unknown = await response.json();
+  const apiTodo = parseSingleTodoPayload(payload);
+  return mapApiTodo(apiTodo);
 };
 
 export const addTodo = async (title: string) => {

@@ -11,7 +11,7 @@ type UseFetchTodosResult = {
 
 export const useFetchTodos = (): UseFetchTodosResult => {
   const { data, isPending, error } = useQuery({
-    queryKey: todoQueryKeys,
+    queryKey: todoQueryKeys.todos,
     queryFn: ({ signal }) => fetchTodos(signal),
   });
 

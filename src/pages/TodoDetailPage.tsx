@@ -5,16 +5,16 @@ import "../styles/page.css";
 import "../styles/todo/todo-status.css";
 import "../styles/todo/todo-button.css";
 import { useTodoActions } from "../hooks/useTodoActions";
-import { useFetchTodos } from "../hooks/useFetchTodos";
+import { useFetchTodo } from "../hooks/useFetchTodo";
 
 export const TodoDetailPage = () => {
-  const { todos, isLoading } = useFetchTodos();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { deleteTodo, editTodo, toggleTodoStatus } = useTodoActions();
 
   const numericId = Number(id);
-  const todo = Number.isFinite(numericId) ? todos.find((item) => item.id === numericId) : undefined;
+  const hasValidId = Number.isFinite(numericId);
+  const { todo, isLoading } = useFetchTodo(hasValidId ? numericId : undefined);
 
   const [titleDraft, setTitleDraft] = useState("");
 

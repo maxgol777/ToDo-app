@@ -8,8 +8,9 @@ export const useDeleteTodo = () => {
 
   const { mutateAsync } = useMutation({
     mutationFn: (id: number) => deleteTodo(id, controller.signal),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: todoQueryKeys });
+    onSuccess: (_data, id) => {
+      void queryClient.invalidateQueries({ queryKey: todoQueryKeys.todos });
+      queryClient.removeQueries({ queryKey: todoQueryKeys.detail(id) });
     },
   });
 

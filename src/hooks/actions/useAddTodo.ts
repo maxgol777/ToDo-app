@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addTodo } from "../services/todo/todoApi.ts";
-import { todoQueryKeys } from "../services/todo/queryKeys.ts";
+import { addTodo } from "../../services/todo/todoApi.ts";
+import { todoQueryKeys } from "../../services/todo/queryKeys.ts";
 
 const ARTIFICIAL_DELAY_MS = 1000;
 

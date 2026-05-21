@@ -4,8 +4,8 @@ import { TextInput } from "../components/ui/common/TextInput";
 import "../styles/page.css";
 import "../styles/todo/todo-status.css";
 import "../styles/todo/todo-button.css";
-import { useTodoActions } from "../hooks/useTodoActions";
-import { useFetchTodo } from "../hooks/useFetchTodo";
+import { useTodoActions } from "../hooks/actions/useTodoActions";
+import { useFetchTodo } from "../hooks/fetching/useFetchTodo";
 
 export const TodoDetailPage = () => {
   const { id } = useParams<{ id: string }>();

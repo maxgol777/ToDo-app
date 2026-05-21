@@ -1,4 +1,4 @@
-import { useAddTodo } from "../../../hooks/useAddTodo";
+import { useAddTodo } from "../../../hooks/actions/useAddTodo";
 import { TextInput } from "../common/TextInput";
 import "../../../styles/todo/todo-input.css";
 import "../../../styles/todo/todo-button.css";
@@ -66,12 +66,7 @@ export const TodoInput = () => {
           )}
         </form.Field>
 
-        <button
-          className="todo-button"
-          type="submit"
-          disabled={isPending}
-          aria-busy={isPending}
-        >
+        <button className="todo-button" type="submit" disabled={isPending} aria-busy={isPending}>
           {isPending ? (
             <span className="todo-button-content">
               <span className="todo-spinner" aria-hidden="true" />

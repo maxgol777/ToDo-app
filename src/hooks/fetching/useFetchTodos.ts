@@ -1,12 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchTodos } from "../services/todo/todoApi.ts";
-import { todoQueryKeys } from "../services/todo/queryKeys.ts";
-import type { Todo } from "../state/todo/types";
+import { fetchTodos } from "../../services/todo/todoApi.ts";
+import { todoQueryKeys } from "../../services/todo/queryKeys.ts";
+import type { Todo } from "../../state/todo/types.ts";
+import type { BaseFetchResult } from "./types.ts";
 
-type UseFetchTodosResult = {
+type UseFetchTodosResult = BaseFetchResult & {
   todos: Todo[];
-  isLoading: boolean;
-  error: string | null;
 };
 
 export const useFetchTodos = (): UseFetchTodosResult => {

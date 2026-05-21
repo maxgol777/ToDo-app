@@ -1,7 +1,7 @@
 import { TodoItem } from "./TodoItem";
 import { TodoInput } from "./TodoInput";
 import "../../../styles/todo/todo-list.css";
-import { useFetchTodos } from "../../../hooks/useFetchTodos.ts";
+import { useFetchTodos } from "../../../hooks/fetching/useFetchTodos.ts";
 
 export const TodoList = () => {
   const { todos, isLoading, error } = useFetchTodos();

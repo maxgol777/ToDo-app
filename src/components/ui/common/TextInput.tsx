@@ -5,12 +5,7 @@ type TextInputProps = {
   className?: string;
 };
 
-export const TextInput = ({
-  value,
-  onChange,
-  placeholder,
-  className,
-}: TextInputProps) => {
+export const TextInput = ({ value, onChange, placeholder, className }: TextInputProps) => {
   const inputClassName = className ? `text-input-base ${className}` : "text-input-base";
 
   return (

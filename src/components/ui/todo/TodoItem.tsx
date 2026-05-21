@@ -25,10 +25,18 @@ export const TodoItem = memo(({ todo }: TodoItemProps) => {
       </p>
 
       <div className="todo-item-actions">
-        <button className="todo-item-action-button" type="button" onClick={() => toggleTodoStatus(todo)}>
+        <button
+          className="todo-item-action-button"
+          type="button"
+          onClick={() => toggleTodoStatus(todo)}
+        >
           {isDone ? "Undo" : "Complete"}
         </button>
-        <button className="todo-item-danger-button" type="button" onClick={() => deleteTodo(todo.id)}>
+        <button
+          className="todo-item-danger-button"
+          type="button"
+          onClick={() => deleteTodo(todo.id)}
+        >
           Delete
         </button>
       </div>

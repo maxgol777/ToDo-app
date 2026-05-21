@@ -5,7 +5,7 @@ import { useEditTodo } from "./useEditTodo";
 import { useToggleTodoStatus } from "./useToggleTodoStatus";
 
 export const useTodoActions = (): TodoActions => {
-  const addTodo = useAddTodo();
+  const { addTodo } = useAddTodo();
   const deleteTodo = useDeleteTodo();
   const editTodo = useEditTodo();
   const toggleTodoStatus = useToggleTodoStatus();

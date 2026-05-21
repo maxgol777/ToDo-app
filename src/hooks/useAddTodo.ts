@@ -5,12 +5,15 @@ import { todoQueryKeys } from "../services/todo/queryKeys.ts";
 export const useAddTodo = () => {
   const queryClient = useQueryClient();
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: (title: string) => addTodo(title),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: todoQueryKeys });
     },
   });
 
-  return (title: string) => mutateAsync(title);
+  return {
+    addTodo: (title: string) => mutateAsync(title),
+    isPending,
+  };
 };

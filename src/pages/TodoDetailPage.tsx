@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { TextInput } from "../components/ui/common/TextInput";
 import "../styles/page.css";
@@ -8,7 +8,7 @@ import { useTodoActions } from "../hooks/useTodoActions";
 import { useFetchTodos } from "../hooks/useFetchTodos";
 
 export const TodoDetailPage = () => {
-  const { todos } = useFetchTodos();
+  const { todos, isLoading } = useFetchTodos();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { deleteTodo, editTodo, toggleTodoStatus } = useTodoActions();
@@ -16,6 +16,22 @@ export const TodoDetailPage = () => {
   const numericId = Number(id);
   const todo = Number.isFinite(numericId) ? todos.find((item) => item.id === numericId) : undefined;
   const [titleDraft, setTitleDraft] = useState(todo?.title ?? "");
+  
+  // TODO  does it need to replace ?
+  // const [titleDraft, setTitleDraft] = useState("");
+  // useEffect(() => {
+  //   if (todo) {
+  //     setTitleDraft(todo.title);
+  //   }
+  // }, [todo?.id, todo?.title]);
+
+  if (isLoading) {
+    return (
+      <section className="page-card">
+        <h1 className="page-title">Loading ToDo...</h1>
+      </section>
+    );
+  }
 
   if (!todo) {
     return (

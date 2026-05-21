@@ -15,15 +15,14 @@ export const TodoDetailPage = () => {
 
   const numericId = Number(id);
   const todo = Number.isFinite(numericId) ? todos.find((item) => item.id === numericId) : undefined;
-  const [titleDraft, setTitleDraft] = useState(todo?.title ?? "");
-  
-  // TODO  does it need to replace ?
-  // const [titleDraft, setTitleDraft] = useState("");
-  // useEffect(() => {
-  //   if (todo) {
-  //     setTitleDraft(todo.title);
-  //   }
-  // }, [todo?.id, todo?.title]);
+
+  const [titleDraft, setTitleDraft] = useState("");
+
+  useEffect(() => {
+    if (todo) {
+      setTitleDraft(todo.title);
+    }
+  }, [todo?.id, todo?.title]);
 
   if (isLoading) {
     return (

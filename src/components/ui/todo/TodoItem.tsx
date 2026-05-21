@@ -5,7 +5,7 @@ import "../../../styles/todo/todo-item.css";
 import "../../../styles/todo/todo-status.css";
 import "../../../styles/todo/todo-button.css";
 import "../../../styles/todo/error.css";
-import { useTodoActions } from "../../../hooks/useTodoActions";
+import { useTodoActions } from "../../../hooks/actions/useTodoActions";
 
 type TodoItemProps = { todo: Todo };
 

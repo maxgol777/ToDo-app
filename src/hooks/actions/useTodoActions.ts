@@ -1,14 +1,14 @@
-import type { TodoActions } from "../state/todo/types";
+import type { TodoActions } from "../../state/todo/types";
 import { useAddTodo } from "./useAddTodo";
 import { useDeleteTodo } from "./useDeleteTodo";
 import { useEditTodo } from "./useEditTodo";
-import { useToggleTodoStatus } from "./useToggleTodoStatus";
+import { createToggleTodoStatus } from "./useToggleTodoStatus";
 
 export const useTodoActions = (): TodoActions => {
-  const addTodo = useAddTodo();
+  const { addTodo } = useAddTodo();
   const deleteTodo = useDeleteTodo();
   const editTodo = useEditTodo();
-  const toggleTodoStatus = useToggleTodoStatus();
+  const toggleTodoStatus = createToggleTodoStatus(editTodo);
 
   return {
     addTodo,

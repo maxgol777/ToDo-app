@@ -1,22 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { TextInput } from "../components/ui/common/TextInput";
-import { useAtomValue } from "jotai";
-import { todosAtom } from "../state/todo/atoms";
 import "../styles/page.css";
 import "../styles/todo/todo-status.css";
 import "../styles/todo/todo-button.css";
-import { useTodoActions } from "../hooks/useTodoActions";
+import { useTodoActions } from "../hooks/actions/useTodoActions";
+import { useFetchTodo } from "../hooks/fetching/useFetchTodo";
 
 export const TodoDetailPage = () => {
-  const todos = useAtomValue(todosAtom);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { deleteTodo, editTodo, toggleTodoStatus } = useTodoActions();
 
   const numericId = Number(id);
-  const todo = Number.isFinite(numericId) ? todos.find((item) => item.id === numericId) : undefined;
-  const [titleDraft, setTitleDraft] = useState(todo?.title ?? "");
+  const hasValidId = Number.isFinite(numericId);
+  const { todo, isLoading } = useFetchTodo(hasValidId ? numericId : undefined);
+
+  const [titleDraft, setTitleDraft] = useState("");
+
+  useEffect(() => {
+    if (todo) {
+      setTitleDraft(todo.title);
+    }
+  }, [todo?.id, todo?.title]);
+
+  if (isLoading) {
+    return (
+      <section className="page-card">
+        <h1 className="page-title">Loading ToDo...</h1>
+      </section>
+    );
+  }
 
   if (!todo) {
     return (
@@ -35,14 +49,14 @@ export const TodoDetailPage = () => {
   const isDone = todo.status === "Done";
 
   const handleDelete = async () => {
-    await deleteTodo(todo.id);
+    deleteTodo(todo.id);
     await navigate("/", { replace: true });
   };
 
   const handleSave = async () => {
     const title = titleDraft.trim();
     if (!title) return;
-    await editTodo({ ...todo, title });
+    editTodo({ ...todo, title });
     await navigate("/", { replace: true });
   };
 

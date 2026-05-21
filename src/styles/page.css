@@ -13,11 +13,6 @@
   font-size: 1.75rem;
 }
 
-.page-meta {
-  color: var(--text);
-  margin-top: 8px;
-}
-
 .page-actions {
   display: flex;
   gap: 8px;

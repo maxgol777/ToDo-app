@@ -56,6 +56,7 @@ const renderTodoItem = (todoOverrides: Partial<Todo> = {}) => {
 
 describe("TodoItem", () => {
   beforeEach(() => {
+    //  reset all mocks (navigateMock, deleteTodoMock, toggleTodoStatusMock)
     vi.clearAllMocks();
   });
 
@@ -63,6 +64,7 @@ describe("TodoItem", () => {
     const view = renderTodoItem();
 
     expect(view.getTitleButton()).toBeInTheDocument();
+    // important part is which style is applied — pending vs done
     expect(view.getStatusText()).toHaveClass("todo-item-status-pending");
     expect(view.getToggleButton()).toBeInTheDocument();
     expect(view.getDeleteButton()).toBeInTheDocument();

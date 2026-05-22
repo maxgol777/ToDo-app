@@ -60,8 +60,10 @@ describe("TextInput", () => {
 
     const input = view.getInputByPlaceholder("Type here");
     await user.type(input, "ab");
-
+    
+    // 2 - because 2 symbols: ab
     expect(handleChange).toHaveBeenCalledTimes(2);
+    // check what value was passed to onChange on each keystroke
     expect(handleChange).toHaveBeenNthCalledWith(1, "a");
     expect(handleChange).toHaveBeenNthCalledWith(2, "b");
   });

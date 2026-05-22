@@ -9,8 +9,10 @@ export const Header = () => {
   });
 
   useEffect(() => {
+    const theme = isDarkMode ? "dark" : "light";
+    document.documentElement.dataset.theme = theme;
     document.documentElement.classList.toggle("dark", isDarkMode);
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+    localStorage.setItem("theme", theme);
   }, [isDarkMode]);
 
   const toggleDarkMode = () => {

@@ -2,11 +2,11 @@
 
 @layer components {
   .todo-button {
-    @apply cursor-pointer rounded-lg border border-zinc-300 bg-zinc-50 px-3 py-2 text-gray-900;
+    @apply cursor-pointer rounded-lg border border-zinc-300 bg-zinc-50 px-3 py-2 text-gray-900 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700;
   }
 
   .todo-button-danger {
-    @apply border-red-200 bg-red-50 text-red-700;
+    @apply border-red-200 bg-red-50 text-red-700 hover:bg-red-100 dark:border-red-900/70 dark:bg-red-950/40 dark:text-red-300 dark:hover:bg-red-950/70;
   }
 
   .todo-button:disabled {

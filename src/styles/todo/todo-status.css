@@ -2,14 +2,14 @@
 
 @layer components {
   .todo-status {
-    @apply m-0 capitalize;
+    @apply m-0 capitalize text-zinc-700 dark:text-zinc-300;
   }
 
   .todo-status-done {
-    @apply text-green-700;
+    @apply text-green-700 dark:text-green-400;
   }
 
   .todo-status-pending {
-    @apply text-red-600;
+    @apply text-red-600 dark:text-red-400;
   }
 }

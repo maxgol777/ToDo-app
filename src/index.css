@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @import "./styles/todo/todo-list.css";
 @import "./styles/todo/todo-item.css";
 @import "./styles/todo/todo-input.css";
@@ -30,7 +31,8 @@
   }
 }
 
-:root.dark {
+:root.dark,
+:root[data-theme="dark"] {
   --text: #9ca3af;
   --text-h: #f3f4f6;
   --bg: #16171d;

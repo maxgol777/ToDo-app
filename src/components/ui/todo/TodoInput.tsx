@@ -1,8 +1,5 @@
 import { useAddTodo } from "../../../hooks/actions/useAddTodo";
 import { TextInput } from "../common/TextInput";
-import "../../../styles/todo/todo-input.css";
-import "../../../styles/todo/todo-button.css";
-import "../../../styles/todo/error.css";
 import { useForm } from "@tanstack/react-form";
 import type { SyntheticEvent } from "react";
 
@@ -44,8 +41,8 @@ export const TodoInput = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="todo-form">
+    <form onSubmit={handleSubmit} className="todo-form">
+      <div className="todo-input-row">
         <form.Field
           name="title"
           validators={{
@@ -60,16 +57,21 @@ export const TodoInput = () => {
                 placeholder="Add a new item"
               />
               {field.state.meta.errors.length > 0 ? (
-                <p className="error">{field.state.meta.errors.join(", ")}</p>
+                <p className="todo-input-error">{field.state.meta.errors.join(", ")}</p>
               ) : null}
             </div>
           )}
         </form.Field>
 
-        <button className="todo-button" type="submit" disabled={isPending} aria-busy={isPending}>
+        <button
+          className="todo-submit-button"
+          type="submit"
+          disabled={isPending}
+          aria-busy={isPending}
+        >
           {isPending ? (
-            <span className="todo-button-content">
-              <span className="todo-spinner" aria-hidden="true" />
+            <span className="todo-submit-content">
+              <span className="todo-submit-spinner" aria-hidden="true" />
               Adding...
             </span>
           ) : (

@@ -1,0 +1,9 @@
+@layer components {
+  .todo-input-error {
+    @apply mt-1 text-left text-xs font-medium text-red-700 dark:text-red-400;
+  }
+
+  .todo-list-state-error {
+    @apply text-left text-sm font-medium text-red-700 dark:text-red-400;
+  }
+}

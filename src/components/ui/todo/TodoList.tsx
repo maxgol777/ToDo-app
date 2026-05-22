@@ -1,15 +1,18 @@
 import { TodoItem } from "./TodoItem";
 import { TodoInput } from "./TodoInput";
-import "../../../styles/todo/todo-list.css";
 import { useFetchTodos } from "../../../hooks/fetching/useFetchTodos.ts";
 
 export const TodoList = () => {
   const { todos, isLoading, error } = useFetchTodos();
 
   const renderBody = () => {
-    if (isLoading) return <p>Loading...</p>;
-    if (error) return <p className="error">Could not load todos: {error}</p>;
-    if (todos.length === 0) return <p>No items to show</p>;
+    if (isLoading) return <p className="todo-list-state">Loading...</p>;
+    if (error) {
+      return <p className="todo-list-state-error">Could not load todos: {error}</p>;
+    }
+    if (todos.length === 0) {
+      return <p className="todo-list-state">No items to show</p>;
+    }
     return todos.map((todo) => <TodoItem key={todo.id} todo={todo} />);
   };
 

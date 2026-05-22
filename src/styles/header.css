@@ -1,36 +1,27 @@
-.app-header {
-  border-bottom: 1px solid var(--border);
-  background-color: var(--bg);
-}
+@reference "../index.css";
 
-.app-header-inner {
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 16px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
+@layer components {
+  .app-header {
+    @apply border-b border-(--border) bg-(--bg);
+  }
 
-.app-nav {
-  display: flex;
-  gap: 12px;
-}
+  .app-header-inner {
+    @apply mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-4;
+  }
 
-.app-nav-link {
-  text-decoration: none;
-  color: var(--text);
-  padding: 6px 10px;
-  border-radius: 8px;
-}
+  .app-nav {
+    @apply flex gap-3;
+  }
 
-.app-nav-link:hover {
-  background-color: var(--accent-bg);
-  color: var(--text-h);
-}
+  .app-nav-link {
+    @apply rounded-lg px-2.5 py-1.5 text-(--text) no-underline;
+  }
 
-.app-nav-link-active {
-  background-color: var(--accent-bg);
-  color: var(--accent);
+  .app-nav-link:hover {
+    @apply bg-(--accent-bg) text-(--text-h);
+  }
+
+  .app-nav-link-active {
+    @apply bg-(--accent-bg) text-(--accent);
+  }
 }

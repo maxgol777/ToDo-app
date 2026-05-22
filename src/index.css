@@ -1,3 +1,10 @@
+@import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@import "./styles/todo/todo-list.css";
+@import "./styles/todo/todo-item.css";
+@import "./styles/todo/todo-input.css";
+@import "./styles/todo/todo-error.css";
+
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -24,15 +31,14 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-  }
+:root.dark,
+:root[data-theme="dark"] {
+  --text: #9ca3af;
+  --text-h: #f3f4f6;
+  --bg: #16171d;
+  --border: #2e303a;
+  --accent: #c084fc;
+  --accent-bg: rgba(192, 132, 252, 0.15);
 }
 
 #root {

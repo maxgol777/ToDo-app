@@ -1,5 +1,3 @@
-import "../../../styles/todo/todo-input.css";
-
 type TextInputProps = {
   value: string;
   onChange: (value: string) => void;
@@ -7,15 +5,12 @@ type TextInputProps = {
   className?: string;
 };
 
-export const TextInput = ({
-  value,
-  onChange,
-  placeholder,
-  className = "todo-input",
-}: TextInputProps) => {
+export const TextInput = ({ value, onChange, placeholder, className }: TextInputProps) => {
+  const inputClassName = className ? `text-input-base ${className}` : "text-input-base";
+
   return (
     <input
-      className={className}
+      className={inputClassName}
       type="text"
       placeholder={placeholder}
       value={value}

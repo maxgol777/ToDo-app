@@ -1,39 +1,64 @@
 import { describe, it, expect, vi } from "vitest";
+import type { ComponentProps } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { TextInput } from "./TextInput";
 
+type TextInputProps = ComponentProps<typeof TextInput>;
+
+const renderTextInput = (props: Partial<TextInputProps> = {}) => {
+  const onChange = props.onChange ?? vi.fn();
+  const mergedProps: TextInputProps = {
+    value: "",
+    onChange,
+    ...props,
+  };
+
+  render(<TextInput {...mergedProps} />);
+
+  return {
+    getInputByRole: () => screen.getByRole("textbox") as HTMLInputElement,
+    getInputByPlaceholder: (placeholder: string) =>
+      screen.getByPlaceholderText(placeholder) as HTMLInputElement,
+  };
+};
+
 describe("TextInput", () => {
   it("renders an input with the given value and placeholder", () => {
-    render(<TextInput value="hello" onChange={() => {}} placeholder="Type here" />);
+    const view = renderTextInput({
+      value: "hello",
+      placeholder: "Type here",
+    });
 
-    const input = screen.getByPlaceholderText("Type here") as HTMLInputElement;
+    const input = view.getInputByPlaceholder("Type here");
     expect(input).toBeInTheDocument();
     expect(input.value).toBe("hello");
     expect(input.type).toBe("text");
   });
 
   it("applies the base class and the optional className together", () => {
-    render(<TextInput value="" onChange={() => {}} className="extra-class" />);
+    const view = renderTextInput({ className: "extra-class" });
 
-    const input = screen.getByRole("textbox");
+    const input = view.getInputByRole();
     expect(input.className).toBe("text-input-base extra-class");
   });
 
   it("applies only the base class when no className is provided", () => {
-    render(<TextInput value="" onChange={() => {}} />);
+    const view = renderTextInput();
 
-    const input = screen.getByRole("textbox");
+    const input = view.getInputByRole();
     expect(input.className).toBe("text-input-base");
   });
 
   it("calls onChange with the new value when the user types", async () => {
     const user = userEvent.setup();
     const handleChange = vi.fn();
+    const view = renderTextInput({
+      onChange: handleChange,
+      placeholder: "Type here",
+    });
 
-    render(<TextInput value="" onChange={handleChange} placeholder="Type here" />);
-
-    const input = screen.getByPlaceholderText("Type here");
+    const input = view.getInputByPlaceholder("Type here");
     await user.type(input, "ab");
 
     expect(handleChange).toHaveBeenCalledTimes(2);

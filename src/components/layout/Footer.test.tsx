@@ -17,7 +17,7 @@ describe("Footer", () => {
     // make getFullYear() in footer return fixed year
     vi.setSystemTime(FIXED_DATE);
   });
-  
+
   // returns real timers for continue another tests
   afterEach(() => {
     vi.useRealTimers();

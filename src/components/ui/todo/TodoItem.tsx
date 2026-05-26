@@ -2,20 +2,21 @@ import { memo } from "react";
 import { useNavigate } from "react-router";
 import type { Todo } from "../../../state/todo/types";
 import { useTodoActions } from "../../../hooks/actions/useTodoActions";
+import { usePrefetchTodoOnVisible } from "../../../hooks/fetching/usePrefetchTodoOnVisible";
 
 type TodoItemProps = { todo: Todo };
 
 export const TodoItem = memo(({ todo }: TodoItemProps) => {
   const navigate = useNavigate();
   const { deleteTodo, toggleTodoStatus } = useTodoActions();
+  const prefetchRef = usePrefetchTodoOnVisible(todo.id);
   const isDone = todo.status === "Done";
+
+  const goToDetail = () => navigate(`/todos/${todo.id}`, { viewTransition: true });
+
   return (
-    <div className="todo-item">
-      <button
-        type="button"
-        className="todo-item-title-button"
-        onClick={() => navigate(`/todos/${todo.id}`)}
-      >
+    <div ref={prefetchRef} className="todo-item" data-todo-id={todo.id}>
+      <button type="button" className="todo-item-title-button" onClick={goToDetail}>
         {todo.title}
       </button>
       <p

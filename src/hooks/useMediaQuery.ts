@@ -1,14 +1,15 @@
 import { useCallback, useSyncExternalStore } from "react";
 
+const canUseMatchMedia = (): boolean =>
+  typeof window !== "undefined" && typeof window.matchMedia === "function";
+
 const matchesQuery = (query: string) =>
-  typeof window !== "undefined" && typeof window.matchMedia === "function"
-    ? window.matchMedia(query).matches
-    : false;
+  canUseMatchMedia() ? window.matchMedia(query).matches : false;
 
 export const useMediaQuery = (query: string): boolean => {
   const subscribe = useCallback(
     (notify: () => void) => {
-      if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+      if (!canUseMatchMedia()) {
         return () => {};
       }
       const mql = window.matchMedia(query);

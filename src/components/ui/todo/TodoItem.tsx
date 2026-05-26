@@ -12,9 +12,18 @@ export const TodoItem = memo(({ todo }: TodoItemProps) => {
   const { deleteTodo, toggleTodoStatus } = useTodoActions();
   const isMobile = useIsMobile();
   const isDone = todo.status === "Done";
-
   const card = (
-    <div className="todo-item rounded-2xl bg-linear-to-br from-white to-zinc-50 shadow-md sm:rounded-lg sm:bg-none sm:shadow-none dark:from-zinc-900 dark:to-zinc-800/70 dark:sm:bg-none">
+    <div
+      className="todo-item 
+    rounded-2xl 
+    bg-white
+    dark:bg-zinc-900
+    dark:border-mist-400
+    sm:rounded-lg 
+    sm:bg-none 
+    sm:shadow-none
+    dark:sm:bg-none"
+    >
       <button
         type="button"
         className="todo-item-title-button text-lg font-semibold sm:text-base sm:font-normal"
@@ -37,7 +46,7 @@ export const TodoItem = memo(({ todo }: TodoItemProps) => {
           {isDone ? "Undo" : "Complete"}
         </button>
         <button
-          className="todo-item-danger-button sr-only sm:not-sr-only"
+          className="todo-item-danger-button hidden sm:inline-block"
           type="button"
           onClick={() => deleteTodo(todo.id)}
         >

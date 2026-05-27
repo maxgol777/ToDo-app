@@ -38,7 +38,11 @@ export const TodoDetailPage = () => {
         <h1 className="page-title">ToDo not found</h1>
         <p>We couldn&apos;t find a ToDo with id &quot;{id}&quot;.</p>
         <div className="page-actions">
-          <button type="button" className="todo-button" onClick={() => navigate("/")}>
+          <button
+            type="button"
+            className="todo-button"
+            onClick={() => navigate("/", { viewTransition: true })}
+          >
             Back to list
           </button>
         </div>
@@ -50,19 +54,19 @@ export const TodoDetailPage = () => {
 
   const handleDelete = async () => {
     deleteTodo(todo.id);
-    await navigate("/", { replace: true });
+    await navigate("/", { replace: true, viewTransition: true });
   };
 
   const handleSave = async () => {
     const title = titleDraft.trim();
     if (!title) return;
     editTodo({ ...todo, title });
-    await navigate("/", { replace: true });
+    await navigate("/", { replace: true, viewTransition: true });
   };
 
   return (
     <section className="page-card">
-      <Link to="/" className="page-back-link">
+      <Link to="/" className="page-back-link" viewTransition>
         &larr; Back to list
       </Link>
 

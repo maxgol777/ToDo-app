@@ -4,6 +4,7 @@
 @import "./styles/todo/todo-item.css";
 @import "./styles/todo/todo-input.css";
 @import "./styles/todo/todo-error.css";
+@import "./styles/transitions.css";
 
 :root {
   --text: #6b6375;

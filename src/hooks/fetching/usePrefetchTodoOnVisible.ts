@@ -9,7 +9,7 @@ export const usePrefetchTodoOnVisible = (id: number) => {
   const queryClient = useQueryClient();
   const elementRef = useRef<HTMLDivElement | null>(null);
 
-  // We only want to prefetch each id once per mount lifecycle.
+  // Flag - if the todo has been prefetched
   const hasPrefetchedRef = useRef(false);
 
   useEffect(() => {
@@ -40,12 +40,16 @@ export const usePrefetchTodoOnVisible = (id: number) => {
             }
           } else if (timeoutId !== undefined) {
             // Tile left the viewport before the debounce fired — cancel it.
+            // prevent prefetching while fast scrolling
             clearTimeout(timeoutId);
             timeoutId = undefined;
           }
         }
       },
-      { threshold: 0.1 },
+      {
+        // if element is fully visible
+        threshold: 1.0,
+      },
     );
 
     observer.observe(element);

@@ -17,7 +17,7 @@ export const TodoItem = memo(({ todo }: TodoItemProps) => {
   const goToDetail = () => navigate(`/todos/${todo.id}`, { viewTransition: true });
   const card = (
     <div
-    ref={prefetchRef}
+      ref={prefetchRef}
       className="todo-item 
     rounded-2xl 
     bg-white
@@ -27,7 +27,6 @@ export const TodoItem = memo(({ todo }: TodoItemProps) => {
     sm:bg-none 
     sm:shadow-none
     dark:sm:bg-none"
-    data-todo-id={todo.id}
     >
       <button
         type="button"

@@ -23,6 +23,10 @@ vi.mock("../../../hooks/actions/useTodoActions", () => ({
   }),
 }));
 
+vi.mock("../../../hooks/fetching/usePrefetchTodoOnVisible", () => ({
+  usePrefetchTodoOnVisible: () => ({ current: null as HTMLDivElement | null }),
+}));
+
 const buildTodo = (overrides: Partial<Todo> = {}): Todo => ({
   id: 1,
   title: "Write unit tests",
@@ -82,7 +86,7 @@ describe("TodoItem", () => {
     await view.clickTitle();
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
-    expect(navigateMock).toHaveBeenCalledWith("/todos/42");
+    expect(navigateMock).toHaveBeenCalledWith("/todos/42", { viewTransition: true });
   });
 
   it("calls toggleTodoStatus with the todo when action button is clicked", async () => {

@@ -1,0 +1,52 @@
+@media (max-width: 639px) {
+  @keyframes slide-right-to-center {
+    from {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes slide-center-to-left {
+    to {
+      transform: translateX(-25%);
+      opacity: 0.6;
+    }
+  }
+  @keyframes slide-left-to-center {
+    from {
+      transform: translateX(-25%);
+      opacity: 0.6;
+    }
+  }
+  @keyframes slide-center-to-right {
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 300ms;
+    animation-timing-function: cubic-bezier(0.5, 0.5, 0, 1);
+    animation-fill-mode: both;
+    mix-blend-mode: normal;
+  }
+
+  :root[data-nav-dir="forward"]::view-transition-old(root) {
+    animation-name: slide-center-to-left;
+  }
+  :root[data-nav-dir="forward"]::view-transition-new(root) {
+    animation-name: slide-right-to-center;
+  }
+  :root[data-nav-dir="back"]::view-transition-old(root) {
+    animation-name: slide-center-to-right;
+  }
+  :root[data-nav-dir="back"]::view-transition-new(root) {
+    animation-name: slide-left-to-center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}

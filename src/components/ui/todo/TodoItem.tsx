@@ -4,6 +4,7 @@ import type { Todo } from "../../../state/todo/types";
 import { useTodoActions } from "../../../hooks/actions/useTodoActions";
 import { useIsMobile } from "../../../hooks/useMediaQuery";
 import { SwipeToDelete } from "./SwipeToDelete";
+import { usePrefetchTodoOnVisible } from "../../../hooks/fetching/usePrefetchTodoOnVisible";
 
 type TodoItemProps = { todo: Todo };
 
@@ -11,9 +12,12 @@ export const TodoItem = memo(({ todo }: TodoItemProps) => {
   const navigate = useNavigate();
   const { deleteTodo, toggleTodoStatus } = useTodoActions();
   const isMobile = useIsMobile();
+  const prefetchRef = usePrefetchTodoOnVisible(todo.id);
   const isDone = todo.status === "Done";
+  const goToDetail = () => navigate(`/todos/${todo.id}`, { viewTransition: true });
   const card = (
     <div
+      ref={prefetchRef}
       className="todo-item 
     rounded-2xl 
     bg-white
@@ -27,7 +31,7 @@ export const TodoItem = memo(({ todo }: TodoItemProps) => {
       <button
         type="button"
         className="todo-item-title-button text-lg font-semibold sm:text-base sm:font-normal"
-        onClick={() => navigate(`/todos/${todo.id}`)}
+        onClick={goToDetail}
       >
         {todo.title}
       </button>

@@ -16,11 +16,8 @@ export const usePrefetchTodoOnVisible = (id: number) => {
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
     const prefetch = () => {
-      const queryKey = todoQueryKeys.detail(id);
-      if (queryClient.getQueryData(queryKey) !== undefined) return;
-
       void queryClient.prefetchQuery({
-        queryKey,
+        queryKey: todoQueryKeys.detail(id),
         queryFn: ({ signal }) => fetchSingleTodo(id, signal),
       });
     };

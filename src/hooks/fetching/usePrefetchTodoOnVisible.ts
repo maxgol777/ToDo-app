@@ -9,7 +9,6 @@ export const usePrefetchTodoOnVisible = (id: number) => {
   const queryClient = useQueryClient();
   const elementRef = useRef<HTMLDivElement | null>(null);
 
-
   useEffect(() => {
     const element = elementRef.current;
     if (!element) return;

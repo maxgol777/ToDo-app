@@ -11,15 +11,15 @@ type UseFetchTodoResult = BaseFetchResult & {
 export const useFetchTodo = (id: number | undefined): UseFetchTodoResult => {
   const hasValidId = typeof id === "number" && Number.isFinite(id);
 
-  const { data, isPending, error, fetchStatus } = useQuery({
-    queryKey: hasValidId ? todoQueryKeys.detail(id) : ["todo", "disabled"],
+  const { data, isLoading, error } = useQuery({
+    queryKey: todoQueryKeys.detail(id as number),
     queryFn: ({ signal }) => fetchSingleTodo(id as number, signal),
     enabled: hasValidId,
   });
 
   return {
     todo: data,
-    isLoading: hasValidId && isPending && fetchStatus !== "idle",
+    isLoading,
     error: error ? (error.message ?? "Unexpected error while loading todo") : null,
   };
 };

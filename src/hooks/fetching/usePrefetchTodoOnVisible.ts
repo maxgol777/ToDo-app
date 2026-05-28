@@ -9,19 +9,18 @@ export const usePrefetchTodoOnVisible = (id: number) => {
   const queryClient = useQueryClient();
   const elementRef = useRef<HTMLDivElement | null>(null);
 
-  // Flag - if the todo has been prefetched
-  const hasPrefetchedRef = useRef(false);
 
   useEffect(() => {
     const element = elementRef.current;
-    if (!element || hasPrefetchedRef.current) return;
-
+    if (!element) return;
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
     const prefetch = () => {
-      hasPrefetchedRef.current = true;
+      const queryKey = todoQueryKeys.detail(id);
+      if (queryClient.getQueryData(queryKey) !== undefined) return;
+
       void queryClient.prefetchQuery({
-        queryKey: todoQueryKeys.detail(id),
+        queryKey,
         queryFn: ({ signal }) => fetchSingleTodo(id, signal),
       });
     };
